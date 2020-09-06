@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 05/09/2020 01:54
+  	Creation date: 06/09/2020 18:25
   	*/
 
 @font-face {
@@ -26,9 +26,6 @@
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
 font-style: normal;
-margin-left: 20px;
-font-size: 60px;
-color: #01416d;
 }
 
 .flaticon-dialogo:before { content: "\f100"; }
@@ -37,3 +34,4 @@ color: #01416d;
 .flaticon-objetivo:before { content: "\f103"; }
 .flaticon-dinero:before { content: "\f104"; }
 .flaticon-plan-de-estudios:before { content: "\f105"; }
+.flaticon-flecha-arriba:before { content: "\f106"; }

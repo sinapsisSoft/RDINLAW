@@ -46,6 +46,10 @@ h1, h2, h3, h4, h5,
   text-align: justify;
 }
 
+.center {
+  text-align: center;
+}
+
 body:after {
   -webkit-transition: .3s all ease-in-out;
   -o-transition: .3s all ease-in-out;
@@ -2100,3 +2104,39 @@ figure figcaption {
       background-color: rgba(255, 255, 255, 0.5); }
     .single-text .owl-dots .owl-dot.active > span {
       background-color: #fff; }
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+
+.back-to-top {
+  position: fixed;
+  display: none;
+  right: 15px;
+  bottom: 15px;
+  z-index: 99999;
+}
+
+.back-to-top i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background: rgb(1, 65, 109, 62%);
+  color: #fff !important;
+  transition: all 0.4s;
+}
+
+.back-to-top i:hover {
+  background: rgb(10, 130, 213, 0.9) !important;
+  color: #fff !important;
+}
+
+#services-section .flaticon {
+  font-size: 60px;
+  color: #01416d;
+  margin: auto;
+}
