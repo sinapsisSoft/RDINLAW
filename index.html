@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
+    <link rel="stylesheet" href="css/toast/toastr.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -173,7 +174,7 @@
               <div>
                 <h3>Área de Litigios</h3>
                 <p>Texto faltante</p>
-                <p><a href="#services_slide">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -185,7 +186,7 @@
               <div>
                 <h3>Área de auditoría jurídica</h3>
                 <p>¿Sabe si su empresa cumple con los lineamientos legales que establecen las diferentes entidades administrativas que la controlan o vigilan?</p>
-                <p><a href="#services_slide" class="scrollto">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -197,7 +198,7 @@
               <div>
                 <h3>Departamento Jurídico Externo</h3>
                 <p>Texto faltante.</p>
-                <p><a href="#services_slide">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -211,7 +212,7 @@
               <div>
                 <h3>Área de vigilancia / dependencia judicial a gran escala</h3>
                 <p>Texto faltante</p>
-                <p><a href="#services_slide">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -223,7 +224,7 @@
               <div>
                 <h3>Área de cobro de cartera</h3>
                 <p>Texto faltante</p>
-                <p><a href="#services_slide">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -235,7 +236,7 @@
               <div>
                 <h3>Casos Pro Bono</h3>
                 <p>Texto faltante</p>
-                <p><a href="#services_slide">Ver más</a></p>
+                <p><a href="#services_slide" class="smoothscroll">Ver más</a></p>
               </div>
             </div>
           </div>
@@ -400,22 +401,26 @@
         </div>
         <div class="row">
           <div class="col-md-12 mb-5">
-            <form action="#" class="p-5 bg-white">
+            <form action="#" class="p-5 bg-white" method="post" id="contactForm" onsubmit="sendData(this.id);return false">
               <h2 class="h4 text-black mb-5">Formulario de contacto</h2> 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Nombre</label>
-                  <input type="text" id="fname" class="form-control">
+                  <label class="text-black" for="name">Nombre</label>
+                  <input type="text" id="name" class="form-control">
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="lname">Apellido</label>
-                  <input type="text" id="lname" class="form-control">
+                  <label class="text-black" for="lastname">Apellido</label>
+                  <input type="text" id="lastname" class="form-control">
                 </div>
               </div>
               <div class="row form-group">                
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label class="text-black" for="email">Correo electrónico</label> 
                   <input type="email" id="email" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="text-black" for="phone">Teléfono</label> 
+                  <input type="number" id="phone" class="form-control">
                 </div>
               </div>
               <div class="row form-group">                
@@ -432,7 +437,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Enviar mensaje" class="btn btn-primary btn-md text-white">
+                  <button type="submit" class="btn btn-primary btn-md text-white">Enviar mensaje</button>
                 </div>
               </div>
             </form>
