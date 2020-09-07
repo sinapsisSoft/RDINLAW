@@ -67,7 +67,7 @@
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-facebook"></span></a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-twitter"></span></a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-linkedin"></span></a></li>
-                <li><a href="login.html" target="_blank" id="loginbtn"><i class="flaticon-usuario-de-perfil"></i></a></li>
+                <li><a href="login.html" target="_blank" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Ingresa"><i class="flaticon-usuario-de-perfil"></i></a></li>
                 <!-- En celular no lo toma -->
               </ul>
             </nav>
@@ -718,7 +718,11 @@
   
   <script src="js/main.js"></script>
   <script async src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
   
   </body>
 </html>
