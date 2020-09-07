@@ -103,6 +103,10 @@ body:after {
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
 
+.site-section-process {
+  padding: 2em 0;
+}
+
 .site-section {
   padding: 2.5em 0; }
   @media (min-width: 768px) {
@@ -2145,4 +2149,10 @@ figure figcaption {
 
 .site-menu li a i {
   font-size: 23px;
+}
+
+.table-shadow {
+  -webkit-box-shadow: 10px 10px 25px -23px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 25px -23px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 25px -23px rgba(0,0,0,0.75);
 }
