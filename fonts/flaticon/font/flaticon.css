@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 06/09/2020 18:25
+  	Creation date: 07/09/2020 05:47
   	*/
 
 @font-face {
@@ -35,3 +35,5 @@ font-style: normal;
 .flaticon-dinero:before { content: "\f104"; }
 .flaticon-plan-de-estudios:before { content: "\f105"; }
 .flaticon-flecha-arriba:before { content: "\f106"; }
+.flaticon-usuario-de-perfil:before { content: "\f107"; }
+.flaticon-contrasena:before { content: "\f108"; }

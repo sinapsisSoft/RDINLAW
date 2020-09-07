@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 06/09/2020 18:25
+    Creation date: 07/09/2020 05:47
     */
 
     @font-face {
@@ -44,6 +44,8 @@
 .flaticon-dinero:before { content: "\f104"; }
 .flaticon-plan-de-estudios:before { content: "\f105"; }
 .flaticon-flecha-arriba:before { content: "\f106"; }
+.flaticon-usuario-de-perfil:before { content: "\f107"; }
+.flaticon-contrasena:before { content: "\f108"; }
     
     $font-Flaticon-dialogo: "\f100";
     $font-Flaticon-escritorio: "\f101";
@@ -52,3 +54,5 @@
     $font-Flaticon-dinero: "\f104";
     $font-Flaticon-plan-de-estudios: "\f105";
     $font-Flaticon-flecha-arriba: "\f106";
+    $font-Flaticon-usuario-de-perfil: "\f107";
+    $font-Flaticon-contrasena: "\f108";
