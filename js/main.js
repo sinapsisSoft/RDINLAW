@@ -1,6 +1,17 @@
-var validateCaptcha = true;//Cambiar a false cuando se implemente el captcha
+var validateCaptcha = false;
 var captcha = null; 
  
+//Function captcha Google
+var onloadCallback = function () {
+  captcha = grecaptcha.render('html_element_captcha', {
+    'sitekey': '6LciusgZAAAAAK26fOegUl4_GK9PeveXpB4lnPDx',
+    'callback': function (response) {
+      validateCaptcha = true;
+    },
+    'theme': 'white'
+  });
+};
+
  AOS.init({
  	duration: 800,
  	easing: 'slide',
@@ -469,5 +480,5 @@ function cleanForm(idForm) {
       objForm[i].value = "";
     }
   }
-  //grecaptcha.reset(); 
+  grecaptcha.reset(); 
 }
