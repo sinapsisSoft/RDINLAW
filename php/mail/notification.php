@@ -17,7 +17,7 @@ class Notification {
 
   public function __construct()
   {
-    $this->from = "lauramggarcia@hotmail.com";
+    $this->from = "informacion@rdinlaw.com";
   }
 
   public function __sendEmail($name, $lastname, $email, $phone, $subject, $message){
@@ -31,7 +31,7 @@ class Notification {
   #Description: Function send mail 
   public function sendMail()
   {    
-      $this->to ="lauramggarcia@hotmail.com";
+      $this->to ="informacion@rdinlaw.com";
       $this ->title = 'Registro de nueva solicitud';
       $banner = 'http://www.rdinlaw.com/test/images/mail/banner1.png';//Cambiar cuando ya tengan el certificado de seguridad
       $footer = 'https://www.sinapsistechnologies.com.co/assets/img/mail/logo_white.png';

@@ -4,7 +4,7 @@ var captcha = null;
 //Function captcha Google
 var onloadCallback = function () {
   captcha = grecaptcha.render('html_element_captcha', {
-    'sitekey': '6LciusgZAAAAAK26fOegUl4_GK9PeveXpB4lnPDx',
+    'sitekey': '6Le7vsgZAAAAABPbc_teliZF2pPipXXfMBLsuKpM',
     'callback': function (response) {
       validateCaptcha = true;
     },
