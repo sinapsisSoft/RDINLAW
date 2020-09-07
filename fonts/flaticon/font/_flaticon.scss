@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 03/04/2019 06:02
+    Creation date: 06/09/2020 18:25
     */
 
     @font-face {
@@ -37,16 +37,18 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-startup:before { content: "\f100"; }
-.flaticon-graphic-design:before { content: "\f101"; }
-.flaticon-settings:before { content: "\f102"; }
-.flaticon-idea:before { content: "\f103"; }
-.flaticon-smartphone:before { content: "\f104"; }
-.flaticon-head:before { content: "\f105"; }
+    .flaticon-dialogo:before { content: "\f100"; }
+.flaticon-escritorio:before { content: "\f101"; }
+.flaticon-grupo:before { content: "\f102"; }
+.flaticon-objetivo:before { content: "\f103"; }
+.flaticon-dinero:before { content: "\f104"; }
+.flaticon-plan-de-estudios:before { content: "\f105"; }
+.flaticon-flecha-arriba:before { content: "\f106"; }
     
-    $font-Flaticon-startup: "\f100";
-    $font-Flaticon-graphic-design: "\f101";
-    $font-Flaticon-settings: "\f102";
-    $font-Flaticon-idea: "\f103";
-    $font-Flaticon-smartphone: "\f104";
-    $font-Flaticon-head: "\f105";
+    $font-Flaticon-dialogo: "\f100";
+    $font-Flaticon-escritorio: "\f101";
+    $font-Flaticon-grupo: "\f102";
+    $font-Flaticon-objetivo: "\f103";
+    $font-Flaticon-dinero: "\f104";
+    $font-Flaticon-plan-de-estudios: "\f105";
+    $font-Flaticon-flecha-arriba: "\f106";
