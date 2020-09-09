@@ -51,7 +51,7 @@
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="login.html" target="_blank" id="loginbtn"><i class="flaticon-usuario-de-perfil"></i></a></li>
+                <li><a href="login.html" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir"><i class="flaticon-usuario-de-perfil"></i></a></li>
               </ul>
             </nav>
           </div>
@@ -125,7 +125,6 @@
               <th scope="col">Despacho</th>
               <th scope="col">Radicado</th>
               <th scope="col">Consecutivo</th>
-              <th scope="col">Suscriptor</th>
               <th scope="col">Apoderado</th>
               <th scope="col">Demandante</th>
               <th scope="col">Demandado</th>
@@ -136,7 +135,6 @@
           <tbody>
             <tr>
               <th scope="row">1</th>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -218,11 +216,13 @@
                     <th scope="col">Fin término</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Ubicación</th>
+                    <th scope="col">Descargar</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -259,6 +259,11 @@
   <script>
     showHideSection('processTable');
   </script>
+  <script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
   
   </body>
 </html>

@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 07/09/2020 05:47
+  	Creation date: 09/09/2020 21:25
   	*/
 
 @font-face {
@@ -37,3 +37,4 @@ font-style: normal;
 .flaticon-flecha-arriba:before { content: "\f106"; }
 .flaticon-usuario-de-perfil:before { content: "\f107"; }
 .flaticon-contrasena:before { content: "\f108"; }
+.flaticon-signo-de-exclamacion-dentro-de-un-circulo:before { content: "\f109"; }
