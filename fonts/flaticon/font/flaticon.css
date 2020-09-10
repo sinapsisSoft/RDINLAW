@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 09/09/2020 21:25
+  	Creation date: 10/09/2020 03:16
   	*/
 
 @font-face {
@@ -38,3 +38,10 @@ font-style: normal;
 .flaticon-usuario-de-perfil:before { content: "\f107"; }
 .flaticon-contrasena:before { content: "\f108"; }
 .flaticon-signo-de-exclamacion-dentro-de-un-circulo:before { content: "\f109"; }
+.flaticon-portafolio:before { content: "\f10a"; }
+.flaticon-solicitud:before { content: "\f10b"; }
+.flaticon-solicitud-1:before { content: "\f10c"; }
+.flaticon-papel-de-hombre-de-negocios-de-la-solicitud-de-empleo:before { content: "\f10d"; }
+.flaticon-pregunta:before { content: "\f10e"; }
+.flaticon-pregunta-1:before { content: "\f10f"; }
+.flaticon-curriculum-vitae:before { content: "\f110"; }
