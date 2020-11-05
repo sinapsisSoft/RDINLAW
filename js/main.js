@@ -490,3 +490,117 @@ function showHideSection(id){
     section.style.display = (section.style.display == 'none') ? 'block' : 'none';
   }
 }
+
+//************ MODAL**************//
+var timeAlert;
+function createModalAlert(idMenssage, type, time) {
+  myStopFunction();
+  let arrayStyle = new Array("alert-success", "alert-info", "alert-warning", "alert-danger");
+  var objModal = document.getElementById("myAlert");
+  objModal.innerHTML = '<div class="alert ' + arrayStyle[type] + ' text-center"><a class="close " data-dismiss="alert">×</a><span>' + idMenssage + '</span></div>';
+
+  timeAlert = setTimeout(function () {
+    objModal.innerHTML = "";
+  }, time);
+  $('html, body').animate({
+    scrollTop: 0
+  }, 600);
+  return false;
+  
+}
+function myStopFunction() {
+  clearTimeout(timeAlert);
+}
+
+function getDataForm(idForm) {
+  let objForm = document.getElementById(idForm);
+  let jsonData = '';
+  let selectForm = objForm.querySelectorAll('select');
+  for (let i = 0; i < objForm.length; i++) {
+
+    let input = false;
+    if (objForm[i].type == "email") {
+      input = true;
+    }
+    if (objForm[i].type == "password") {
+      input = true;
+    }
+    if (objForm[i].type == "text") {
+      input = true;
+    }
+    if (objForm[i].type == "number") {
+      input = true;
+    }
+    if (objForm[i].type == "hidden") {
+      input = true;
+    }
+    if (objForm[i].type == "date") {
+      input = true;
+    }
+
+    if (input) {
+
+      jsonData += '"' + objForm[i].id + '":' + '"' + objForm[i].value + '",';
+
+    }
+  }
+  ///For select ///
+  for (let j = 0; j < selectForm.length; j++) {
+    let objSelect = document.getElementById(selectForm[j].id);
+    if (objSelect != 'Quo_dimensions') {
+ 
+      jsonData += '"' + selectForm[j].id + '":' + '"' + objSelect.options[objSelect.selectedIndex].value + '",';
+    }
+  }
+  jsonData = jsonData.substring(0, jsonData.length - 1);
+  return jsonData;
+}
+
+//************ VALIDATOR FORM**************//
+function validatorForm(idForm) {
+  let objForm = document.getElementById(idForm);
+
+  ///For input ///
+  for (let i = 0; i < objForm.length; i++) {
+
+    if (objForm[i].required == true) {
+      if (objForm[i].type == "email") {
+        if (objForm[i].value == "" || objForm[i].value.length == 0) {
+          return false;
+        }
+      }
+      if (objForm[i].type == "password") {
+        if (objForm[i].value == "" || objForm[i].value.length == 0) {
+          return false;
+        }
+      }
+      if (objForm[i].type == "text") {
+        if (objForm[i].value == "" || objForm[i].value.length == 0) {
+          return false;
+        }
+      }
+      if (objForm[i].type == "number") {
+        if (objForm[i].value == "" || objForm[i].value.length == 0) {
+          return false;
+        }
+      }
+      if (objForm[i].type == "date") {
+        if (objForm[i].value == "" || objForm[i].value.length == 0) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
+
+function loadPageView(){
+  let obj=document.getElementById("loadPage");
+  obj.style.display="block";
+  let divObj="";
+  for(let i=0;i<4;i++){
+    divObj +='<div class="block"></div>';
+  }
+  obj.innerHTML=divObj;
+  //disableScroll();  
+}
