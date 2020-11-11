@@ -1,0 +1,9 @@
+.table-process{
+  font-size: 11px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.table-performance {
+  font-size: 11px;
+}

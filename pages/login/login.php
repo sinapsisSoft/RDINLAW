@@ -22,7 +22,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	<div class="loadPage" id="loadPage"></div>
+<div class="loadPage" id="loadPage"></div>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -73,8 +73,6 @@
   <!--Alert-->
 	
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EF7Y9SLDCK"></script>
 <!--===============================================================================================-->	
 	<script src="../../vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -91,11 +89,10 @@
 	</script>
 <!--===============================================================================================-->
 <script src="../../js/main.js"></script>  
-<script src="../../js/properties.js"></script> 
-<script src="../../js/Storage.js"></script>
-<script src="js/login.js"></script>
+<script src="../../js/properties.js"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="../../js/analytics.js"></script>
+<?php include("../../php/viewHtml/jsLinks.php") ?>
 
 </body>
 </html>

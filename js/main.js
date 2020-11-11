@@ -484,12 +484,12 @@ function cleanForm(idForm) {
 // Description: Function to show process table
 // Author: Laura Grisales
 // Date: 07/09/2020
-function showHideSection(id){
-  if(document.getElementById){
-    let section = document.getElementById(id);
-    section.style.display = (section.style.display == 'none') ? 'block' : 'none';
-  }
-}
+// function showHideSection(id){
+//   if(document.getElementById){
+//     let section = document.getElementById(id);
+//     section.style.display = (section.style.display == 'none') ? 'block' : 'none';
+//   }
+// }
 
 //************ MODAL**************//
 var timeAlert;

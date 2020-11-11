@@ -2156,3 +2156,36 @@ figure figcaption {
   -moz-box-shadow: 10px 10px 25px -23px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 25px -23px rgba(0,0,0,0.75);
 }
+
+.my-custom-scrollbar {
+  max-height: 500px;  
+  font-size: 0.90rem;
+  scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+  display: none;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
