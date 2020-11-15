@@ -69,7 +69,7 @@ if (!isset($_SESSION['User'])) {
                 <li><a href="" data-placement="top" title="Crear nueva solicitud" data-toggle="modal" data-target="#requests">
                     <i class="flaticon-solicitud"></i>
                   </a></li>
-                <li><a href="../login/login.php" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir" onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i></a></li>
+                <li><a href="../../php/class/closeSession.php" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir" onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i></a></li>
               </ul>
             </nav>
           </div>
@@ -110,6 +110,7 @@ if (!isset($_SESSION['User'])) {
             <h5 id="labelName" class="card-title"></h5>
             <p class="card-text">
               <strong>NIT.: </strong><span id="User_identification"></span><br>
+              <strong>E-mail: </strong><span id="User_email"></span><br>
             </p>
           </div>
         </div>

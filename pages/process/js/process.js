@@ -20,6 +20,7 @@ function getDataUser(data, type) {
         if (jsonObj.length != 0) {
           if(type == 0){            
             document.getElementById("User_identification").innerHTML = jsonObj[0]["User_identification"];
+            document.getElementById("User_email").innerHTML = data[0]["User_email"];
             getDataProcess(data[0]["User_email"],0);
           }
         }
@@ -171,3 +172,9 @@ function getDataProcess(data, type) {
       return 0;
     }
   }
+
+function closeSession() {
+  let obj = new StoragePage();
+  obj.removeStorageUser();
+  window.location.assign("../login/login.php");
+}
