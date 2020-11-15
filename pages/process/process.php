@@ -110,7 +110,33 @@ if (!isset($_SESSION['User'])) {
             <h5 id="labelName" class="card-title"></h5>
             <p class="card-text">
               <strong>NIT.: </strong><span id="User_identification"></span><br>
-              <strong>Teléfono: </strong><span id="User_telephone"></span><br>
+            </p>
+          </div>
+        </div>
+        <div class="card card-filter">
+          <div class="card-header">
+            Ordenamiento rápido
+          </div>
+          <div class="card-body">
+            <select name="selectFilter" id="selectFilter" class="custom-select" onChange="filter(this.id); return false;">
+              <option value="0">Seleccione</option>
+              <option value="Proc_building-0">Edificio de A-Z</option>
+              <option value="Proc_building-1">Edificio de Z-A</option>
+              <option value="Proc_origin-0">Origen de A-Z</option>
+              <option value="Proc_origin-1">Origen de Z-A</option>
+              <option value="Proc_office-0">Despacho de A-Z</option>
+              <option value="Proc_office-1">Despacho de Z-A</option>
+              <option value="Proc_filing-0">Radicado de 0-9</option>
+              <option value="Proc_filing-1">Radicado de 9-0</option>
+              <option value="Proc_consecutive-0">Consecutivo de 0-9</option>
+              <option value="Proc_consecutive-1">Consecutivo de 9-0</option>
+              <option value="Proc_attorney-0">Apoderado de A-Z</option>
+              <option value="Proc_attorney-1">Apoderado de Z-A</option>
+              <option value="Proc_plaintiff-0">Demandante de A-Z</option>
+              <option value="Proc_plaintiff-1">Demandante de Z-A</option>
+              <option value="Proc_defendant-0">Demandado de A-Z</option>
+              <option value="Proc_defendant-1">Demandado de Z-A</option>
+            </select>
           </div>
         </div>
       </div>
@@ -177,15 +203,99 @@ if (!isset($_SESSION['User'])) {
           </button>
         </div>
         <div class="modal-body my-custom-scrollbar">
-            <div class="container table-responsive table-performance">
-              <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tablePerformance" width="100%" cellspacing="0">
-              </table>
-            </div>
+          <div class="container table-responsive table-performance">
+            <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tablePerformance" width="100%" cellspacing="0">
+            </table>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
-      </div>      
+      </div>
+    </div>
+  </div>
+  <!-- Fin Detail Modal -->
+
+  <!-- Process Detail modal -->
+  <div class="modal fade" id="detailProcess" tabindex="-1" aria-labelledby="detailProcessLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailProcessModalLabel">Detalle</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="processDetailForm">
+            <div class="row">
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_building" class="col-form-label">Edificio</label>
+                <input type="text" class="form-control read" id="Proc_building">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_origin" class="col-form-label">Origen</label>
+                <input type="text" class="form-control read" id="Proc_origin">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_office" class="col-form-label">Despacho</label>
+                <input type="text" class="form-control read" id="Proc_office">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_officeEmail" class="col-form-label">E-mail despacho</label>
+                <input type="text" class="form-control read" id="Proc_officeEmail">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_filing" class="col-form-label">Radicado</label>
+                <input type="text" class="form-control read" id="Proc_filing">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_consecutive" class="col-form-label">Consecutivo</label>
+                <input type="text" class="form-control read" id="Proc_consecutive">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_attorney" class="col-form-label">Apoderado</label>
+                <input type="text" class="form-control read" id="Proc_attorney">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_plaintiff" class="col-form-label">Demandante</label>
+                <input type="text" class="form-control read" id="Proc_plaintiff">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_defendant" class="col-form-label">Demandado</label>
+                <input type="text" class="form-control read" id="Proc_defendant">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_department" class="col-form-label">Departamento</label>
+                <input type="text" class="form-control read" id="Proc_department">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_city" class="col-form-label">Ciudad</label>
+                <input type="text" class="form-control read" id="Proc_city">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_juridistic" class="col-form-label">Jurisdicción</label>
+                <input type="text" class="form-control read" id="Proc_juridistic">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_area" class="col-form-label">Competencia</label>
+                <input type="text" class="form-control read" id="Proc_area">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Ptype_description" class="col-form-label">Tipo de proceso</label>
+                <input type="text" class="form-control read" id="Ptype_description">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_content" class="col-form-label">Contenido</label>
+                <input type="text" class="form-control read" id="Proc_content">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Fin Detail Modal -->
