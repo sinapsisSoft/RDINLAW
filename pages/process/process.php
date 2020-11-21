@@ -283,8 +283,8 @@ if (!isset($_SESSION['User'])) {
                 <input type="text" class="form-control read" id="Proc_area">
               </div>
               <div class="form-group col-lg-4 col-sm-12">
-                <label for="Ptype_description" class="col-form-label">Tipo de proceso</label>
-                <input type="text" class="form-control read" id="Ptype_description">
+                <label for="Ptype_name" class="col-form-label">Tipo de proceso</label>
+                <input type="text" class="form-control read" id="Ptype_name">
               </div>
               <div class="form-group col-lg-4 col-sm-12">
                 <label for="Proc_content" class="col-form-label">Contenido</label>
