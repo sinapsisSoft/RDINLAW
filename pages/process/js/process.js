@@ -1,6 +1,6 @@
 var jsonObj1 = "";
 var arrayCell = new Array("Edificio", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
-var arrayCell1 = new Array("#","Actuación", "Inicio término", "Fin término", "Fecha", "Ubicación", "Anexo");
+var arrayCell1 = new Array("#","Actuación", "Fecha", "Inicio término", "Fin término", "Ubicación", "Anexo");
 
 function setGeneralInformation(){
   let obj=new StoragePage();
