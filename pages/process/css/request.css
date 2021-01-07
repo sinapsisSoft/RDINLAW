@@ -1,0 +1,15 @@
+.square {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+.Creado{
+  background-color: #ffa600;
+}
+.Procesado{
+  background-color: #efff00;
+}
+
+.Resuelto {
+  background-color: #09c012;
+}

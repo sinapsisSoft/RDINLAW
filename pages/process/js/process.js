@@ -6,6 +6,9 @@ function setGeneralInformation(){
   let obj=new StoragePage();
   let json=JSON.parse(obj.getStorageLogin());
   getDataUser(json,0);
+  setTimeout(function(){ 
+    getDataRequest("",0);             
+  }, 1000);  
 }
 
 function getDataUser(data, type) {
@@ -21,6 +24,7 @@ function getDataUser(data, type) {
           if(type == 0){            
             document.getElementById("User_identification").innerHTML = jsonObj[0]["User_identification"];
             document.getElementById("User_email").innerHTML = data[0]["User_email"];
+            document.getElementById("User_id").innerHTML = data[0]["User_id"];
             getDataProcess(data[0]["User_email"],0);
           }
         }

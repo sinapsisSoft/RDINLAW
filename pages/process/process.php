@@ -32,6 +32,7 @@ if (!isset($_SESSION['User'])) {
   <link rel="stylesheet" href="../../css/aos.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="css/process.css">
+  <link rel="stylesheet" href="css/request.css">
 
 </head>
 
@@ -66,10 +67,10 @@ if (!isset($_SESSION['User'])) {
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="" data-placement="top" title="Crear nueva solicitud" data-toggle="modal" data-target="#requests">
-                    <i class="flaticon-solicitud"></i>
+                <li data-toggle="tooltip" data-placement="top" title="Nueva Solicitud"><a href="" data-placement="top" title="Crear nueva solicitud" data-toggle="modal" data-target="#requests">
+                    <i class="flaticon-solicitud"></i> Nueva solicitud
                   </a></li>
-                <li><a href="../../php/class/closeSession.php" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir" onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i></a></li>
+                <li><a href="../../php/class/closeSession.php" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir" onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i> Cerrar Sesión</a></li>
               </ul>
             </nav>
           </div>
@@ -84,20 +85,18 @@ if (!isset($_SESSION['User'])) {
             <div class="single-text owl-carousel">
               <div class="slide">
                 <h1 class="text-uppercase" data-aos="fade-up">Seguimiento de expedientes</h1>
-                <p class="mb-5 desc" data-aos="fade-up" data-aos-delay="100">Encuentre aquí todos sus expediente y el detalle de cada uno de ellos.</p>
+                <p class="mb-5 desc" data-aos="fade-up" data-aos-delay="100">Encuentre aquí todos sus expedientes y el detalle de cada uno de ellos.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <a href="#records-section" class="mouse smoothscroll">
         <span class="mouse-icon">
           <span class="mouse-wheel"></span>
         </span>
       </a>
     </div>
-
     <section class="site-section-process bg-light" id="records-section">
       <div class="container">
         <div class="card">
@@ -105,49 +104,84 @@ if (!isset($_SESSION['User'])) {
             Datos básicos
           </div>
           <div class="card-body">
-            <span id="Comp_id" hidden></span>
-            <input id="User_id" hidden>
-            <h5 id="labelName" class="card-title"></h5>
-            <p class="card-text">
-              <strong>NIT.: </strong><span id="User_identification"></span><br>
-              <strong>E-mail: </strong><span id="User_email"></span><br>
-            </p>
+            <div class="row d-flex justify-content-between">
+              <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12">
+                <span id="Comp_id" hidden=""></span>
+                <input id="User_id" hidden="">
+                <h5 id="labelName" class="card-title"></h5>
+                <p class="card-text">
+                  <strong>NIT.: </strong><span id="User_identification"></span><br>
+                  <strong>E-mail: </strong><span id="User_email"></span><br>
+                </p>
+              </div>
+              <div class="col-auto" data-toggle="tooltip" data-placement="top" title="Revisar calendario">
+                <a data-toggle="modal" data-target="#calendar" style="color: darkcyan; cursor: pointer;"><i class="icon-calendar" style="font-size: 62px;"></i></a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card card-filter">
-          <div class="card-header">
-            Ordenamiento rápido
+        <nav class="navbar navbar-light bg-light card-filter" style="text-align: center;">
+          <div style="width: 100%;">
+            <button class="btn btn-warning" data-toggle="collapse" href="#processCollapse" data-parent="#selector" role="button" aria-expanded="true" aria-controls="processCollapse" style="margin-right: 100px;">Seguimiento de expedientes</button>
+            <button class="btn btn-info" data-toggle="collapse" href="#requestCollapse" data-parent="#selector" role="button" aria-expanded="false" aria-controls="requestCollapse">Seguimiento de solicitudes</button>
           </div>
-          <div class="card-body">
-            <select name="selectFilter" id="selectFilter" class="custom-select" onChange="filter(this.id); return false;">
-              <option value="0">Seleccione</option>
-              <option value="Proc_building-0">Edificio de A-Z</option>
-              <option value="Proc_building-1">Edificio de Z-A</option>
-              <option value="Proc_origin-0">Origen de A-Z</option>
-              <option value="Proc_origin-1">Origen de Z-A</option>
-              <option value="Proc_office-0">Despacho de A-Z</option>
-              <option value="Proc_office-1">Despacho de Z-A</option>
-              <option value="Proc_filing-0">Radicado de 0-9</option>
-              <option value="Proc_filing-1">Radicado de 9-0</option>
-              <option value="Proc_consecutive-0">Consecutivo de 0-9</option>
-              <option value="Proc_consecutive-1">Consecutivo de 9-0</option>
-              <option value="Proc_attorney-0">Apoderado de A-Z</option>
-              <option value="Proc_attorney-1">Apoderado de Z-A</option>
-              <option value="Proc_plaintiff-0">Demandante de A-Z</option>
-              <option value="Proc_plaintiff-1">Demandante de Z-A</option>
-              <option value="Proc_defendant-0">Demandado de A-Z</option>
-              <option value="Proc_defendant-1">Demandado de Z-A</option>
-            </select>
+        </nav>
+    </section>
+    <div id="selector">
+      <div id="processCollapse" class="collapse show" data-parent="#selector">
+        <section class="site-section-process bg-light" style="padding-top: 0;">
+          <div class="container">
+            <div class="card">
+              <div class="card-header">
+                Ordenamiento rápido
+              </div>
+              <div class="card-body">
+                <select name="selectFilter" id="selectFilter" class="custom-select" onChange="filter(this.id); return false;">
+                  <option value="0">Seleccione</option>
+                  <option value="Proc_building-0">Edificio de A-Z</option>
+                  <option value="Proc_building-1">Edificio de Z-A</option>
+                  <option value="Proc_origin-0">Origen de A-Z</option>
+                  <option value="Proc_origin-1">Origen de Z-A</option>
+                  <option value="Proc_office-0">Despacho de A-Z</option>
+                  <option value="Proc_office-1">Despacho de Z-A</option>
+                  <option value="Proc_filing-0">Radicado de 0-9</option>
+                  <option value="Proc_filing-1">Radicado de 9-0</option>
+                  <option value="Proc_consecutive-0">Consecutivo de 0-9</option>
+                  <option value="Proc_consecutive-1">Consecutivo de 9-0</option>
+                  <option value="Proc_attorney-0">Apoderado de A-Z</option>
+                  <option value="Proc_attorney-1">Apoderado de Z-A</option>
+                  <option value="Proc_plaintiff-0">Demandante de A-Z</option>
+                  <option value="Proc_plaintiff-1">Demandante de Z-A</option>
+                  <option value="Proc_defendant-0">Demandado de A-Z</option>
+                  <option value="Proc_defendant-1">Demandado de Z-A</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+        <section class="site-section-process card-filter">
+          <div class="container card-filter table-responsive table-process my-custom-scrollbar">
+            <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableProcess" width="100%" cellspacing="0">
+            </table>
+          </div>
+        </section>
       </div>
-    </section>
-    <section class="site-section-process">
-      <div class="container table-responsive table-process my-custom-scrollbar">
-        <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableProcess" width="100%" cellspacing="0">
-        </table>
+      <div id="requestCollapse" class="collapse" data-parent="#selector">
+        <section class="site-section-process card-filter">
+          <div class="container">
+            <div class="row justify-content-end">
+              <div class="col-auto">
+                <a href="#" class="btn btn-primary btn-success" data-toggle="modal" data-target="#requests">Añadir <i class="fas fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="container card-filter table-responsive table-process my-custom-scrollbar">
+            <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableRequest" width="100%" cellspacing="0">
+            </table>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
     <footer class="site-footer">
       <div class="container">
         <div class="row">
@@ -301,6 +335,30 @@ if (!isset($_SESSION['User'])) {
   </div>
   <!-- Fin Detail Modal -->
 
+  <!-- Detail modal -->
+  <div class="modal fade" id="action" tabindex="-1" aria-labelledby="actionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="actionModalLabel">Detalle</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body my-custom-scrollbar">
+          <div class="container table-responsive table-performance">
+            <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableAction" width="100%" cellspacing="0">
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Detail Modal -->
+
   <!-- Requests Modal -->
   <div class="modal fade" id="requests" tabindex="-1" aria-labelledby="requestsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -312,14 +370,17 @@ if (!isset($_SESSION['User'])) {
           </button>
         </div>
         <div class="modal-body">
-          <form id="requestsForm" onsubmit="sendMail(this.id); return false">
+          <form id="requestsForm" onsubmit="sendDataRequest(this.id, event, 0); return false">
+            <input id="Req_id" value="0" type="hidden">
+            <input id="Stat_id" value="12" type="hidden">
+            <input id="Act_observation" type="hidden">
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Asunto:</label>
-              <input type="text" class="form-control" id="recipient-name" required>
+              <label for="Req_subject" class="col-form-label">Asunto:</label>
+              <input type="text" class="form-control" id="Req_subject" required>
             </div>
             <div class="form-group">
-              <label for="message-text" class="col-form-label">Mensaje:</label>
-              <textarea class="form-control" rows="6" id="message-text" required></textarea>
+              <label for="Req_message" class="col-form-label">Mensaje:</label>
+              <textarea class="form-control" rows="6" id="Req_message" required></textarea>
             </div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-primary">Enviar mensaje</button>
@@ -329,6 +390,26 @@ if (!isset($_SESSION['User'])) {
     </div>
   </div>
   <!-- Fin Requests Modal -->
+
+  <!-- Calendar modal -->
+  <div class="modal fade" id="calendar" tabindex="-1" aria-labelledby="calendarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="calendarModalLabel">Calendario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body my-custom-scrollbar">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Calendar Modal -->
 
   <script src="../../js/jquery-3.5.1.min.js"></script>
   <script src="../../js/jquery-ui.js"></script>
@@ -346,6 +427,7 @@ if (!isset($_SESSION['User'])) {
   <script src="../../js/main.js"></script>
   <script src="../../js/properties.js"></script>
   <script src="js/process.js"></script>
+  <script src="js/request.js"></script>
   <?php include("../../php/viewHtml/jsLinks.php") ?>
 
   <script>
