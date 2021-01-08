@@ -90,7 +90,7 @@ function getDataProcess(data, type) {
     let table = "";
     for (let j = 0; j < arrayCell.length; j++) {
       if (j == 0) {
-        objThead += '<tr class="thead-dark">';
+        objThead += '<tr class="thead-dark title">';
       }
       objThead += '<th>' + arrayCell[j] + '</th>';
       if (j == arrayCell.length) {
@@ -99,12 +99,12 @@ function getDataProcess(data, type) {
     }
     for (let k = 0; k < arrayCell.length - 2; k++) {
       if (k == 0) {
-        objThead += '<tr>';
+        objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k  + ",'myInput'" + ')" placeholder="Search.." title="Search"></th>';
-      if (k == arrayCell.length) {
-        objThead += '</tr>';
-      }
+    }
+    for(let l = arrayCell.length; l > arrayCell.length - 2; l--){
+      objThead += '<th></th>';
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
       objtbody += '<tr><td>' + jSon[i].Proc_building + '</td><td>' + jSon[i].Proc_origin + '</td><td>' + jSon[i].Proc_office + '</td><td>' + jSon[i].Proc_filing + '</td><td>' + jSon[i].Proc_consecutive + '</td><td>' + jSon[i].Proc_attorney + '</td><td>' + jSon[i].Proc_plaintiff + '</td><td>' + jSon[i].Proc_defendant + '</td><td>' + jSon[i].Proc_status + '</td><td style="text-align: center;"><button onclick="getDataProcess('+ jSon[i].Proc_id + ',2)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-list-alt"></i></button></td><td style="text-align: center;"><button onclick="getDataProcess('+ jSon[i].Proc_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-history"></i></button></td></tr>';
@@ -124,7 +124,7 @@ function getDataProcess(data, type) {
     let table = "";
     for (let j = 0; j < arrayCell.length; j++) {
       if (j == 0) {
-        objThead += '<tr class="thead-dark">';
+        objThead += '<tr class="thead-dark title">';
       }
       objThead += '<th>' + arrayCell[j] + '</th>';
       if (j == arrayCell.length) {
@@ -133,15 +133,17 @@ function getDataProcess(data, type) {
     }
     for (let k = 0; k < arrayCell.length - 1; k++) {
       if (k == 0) {
-        objThead += '<tr>';
+        objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput1' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k + ",'myInput1'" + ')" placeholder="Search.." title="Search"></th>';
-      if (k == arrayCell.length) {
-        objThead += '</tr>';
-      }
+    }
+    for(let l = arrayCell.length; l > arrayCell.length - 1; l--){
+      objThead += '<th></th>';
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
       let rute = jSon[i].Perf_attached.length == 0 ? '' : 'href="' + jSon[i].Perf_attached + '"';
+      jSon[i].Perf_initialDate = jSon[i].Perf_initialDate == '0000-00-00' ? '' : jSon[i].Perf_initialDate; 
+      jSon[i].Perf_finalDate = jSon[i].Perf_finalDate == '0000-00-00' ? '' : jSon[i].Perf_finalDate; 
       objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Perf_description + '</td><td>' + jSon[i].Perf_date + '</td><td>' + jSon[i].Perf_initialDate + '</td><td>' + jSon[i].Perf_finalDate + '</td><td>' + jSon[i].Perf_location + '</td><td><a ' + rute + ' target="_blank" class="btn btn-info" style="margin:0; padding:5px"><i class="icon-attach_file"></i></a></td></tr>';
     }
     objtbody += '</tbody>';

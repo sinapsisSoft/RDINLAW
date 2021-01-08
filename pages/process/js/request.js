@@ -1,5 +1,5 @@
-var arrayCell2 = new Array("#","Asunto","Mensaje", "Fecha solicitud", "Estado", "","Seguimiento");
-var arrayCell3 = new Array("Observación", "Fecha cambio de estado", "Estado", "");
+var arrayCell2 = new Array("#","Asunto","Mensaje", "Fecha", "Estado", "","Seguimiento");
+var arrayCell3 = new Array("Observación", "Fecha", "Estado", "");
 
 function getDataRequest(dataSetRequest, typeSend) {
   try {
@@ -82,7 +82,7 @@ function setDataRequest(dataSetRequest, typeSend) {
     let table = "";
     for (let j = 0; j < arrayCell.length; j++) {
       if (j == 0) {
-        objThead += '<tr class="thead-dark">';
+        objThead += '<tr class="thead-dark title">';
       }
       objThead += '<th>' + arrayCell[j] + '</th>';
       if (j == arrayCell.length) {
@@ -91,12 +91,12 @@ function setDataRequest(dataSetRequest, typeSend) {
     }
     for (let k = 0; k < arrayCell.length - 3; k++) {
       if (k == 0) {
-        objThead += '<tr>';
+        objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput2' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k + ",'myInput2'" + ')" placeholder="Search.." title="Search"></th>';
-      if (k == arrayCell.length) {
-        objThead += '</tr>';
-      }
+    }
+    for(let l = arrayCell.length; l > arrayCell.length - 3; l--){
+      objThead += '<th></th>';
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
       objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Req_subject + '</td><td>' + jSon[i].Req_message + '</td><td>' + jSon[i].Act_date + '</td><td><div class="square ' + jSon[i].Stat_name + ' mx-auto" title='+ jSon[i].Stat_name +'></td><td>' + jSon[i].Stat_name + '</td><td style="text-align: center;"><button onclick="getDataRequest('+ jSon[i].Req_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-calendar"></i></button></td></tr>';
@@ -114,7 +114,7 @@ function setDataRequest(dataSetRequest, typeSend) {
     let table = "";
     for (let j = 0; j < arrayCell.length; j++) {
       if (j == 0) {
-        objThead += '<tr class="thead-dark">';
+        objThead += '<tr class="thead-dark title">';
       }
       objThead += '<th>' + arrayCell[j] + '</th>';
       if (j == arrayCell.length) {
@@ -123,12 +123,12 @@ function setDataRequest(dataSetRequest, typeSend) {
     }
     for (let k = 0; k < arrayCell.length - 2; k++) {
       if (k == 0) {
-        objThead += '<tr>';
+        objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput3' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k + ",'myInput3'" + ')" placeholder="Search.." title="Search"></th>';
-      if (k == arrayCell.length) {
-        objThead += '</tr>';
-      }
+    }
+    for(let l = arrayCell.length; l > arrayCell.length - 2; l--){
+      objThead += '<th></th>';
     }
     for (let i = 0; i < jSon.length; i++) {      
       objtbody += '<tr>' + 

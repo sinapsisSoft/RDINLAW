@@ -2189,3 +2189,15 @@ figure figcaption {
 .my-custom-scrollbar::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
+table thead .title th {
+  position: sticky;
+  top: 0
+}
+
+table thead .blue th {
+  background-color: #01416d;
+  position: sticky;
+  top: 42px;
+}
+
