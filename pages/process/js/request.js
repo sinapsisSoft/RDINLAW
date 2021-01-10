@@ -89,17 +89,18 @@ function setDataRequest(dataSetRequest, typeSend) {
         objThead += '</tr>';
       }
     }
-    for (let k = 0; k < arrayCell.length - 3; k++) {
+    for (let k = 0; k < arrayCell.length - 2; k++) {
       if (k == 0) {
         objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput2' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k + ",'myInput2'" + ')" placeholder="Search.." title="Search"></th>';
     }
-    for(let l = arrayCell.length; l > arrayCell.length - 3; l--){
+    for(let l = arrayCell.length; l > arrayCell.length - 2; l--){
       objThead += '<th></th>';
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
-      objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Req_subject + '</td><td>' + jSon[i].Req_message + '</td><td>' + jSon[i].Act_date + '</td><td><div class="square ' + jSon[i].Stat_name + ' mx-auto" title='+ jSon[i].Stat_name +'></td><td>' + jSon[i].Stat_name + '</td><td style="text-align: center;"><button onclick="getDataRequest('+ jSon[i].Req_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-calendar"></i></button></td></tr>';
+      let className = jSon[i].Stat_name.replace(/\s+/g, ''); 
+      objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Req_subject + '</td><td>' + jSon[i].Req_message + '</td><td>' + jSon[i].Act_date + '</td><td>' + jSon[i].Stat_name + '</td><td><div class="square ' + className + ' mx-auto" title='+ jSon[i].Stat_name +'></td><td style="text-align: center;"><button onclick="getDataRequest('+ jSon[i].Req_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-calendar"></i></button></td></tr>';
     }
     objtbody += '</tbody>';
     objThead += '</thead>';
@@ -121,21 +122,22 @@ function setDataRequest(dataSetRequest, typeSend) {
         objThead += '</tr>';
       }
     }
-    for (let k = 0; k < arrayCell.length - 2; k++) {
+    for (let k = 0; k < arrayCell.length - 1; k++) {
       if (k == 0) {
         objThead += '<tr class="blue">';
       }
       objThead += '<th><input type="text" class="form-control bg-light border-0 small" id="myInput3' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k + ",'myInput3'" + ')" placeholder="Search.." title="Search"></th>';
     }
-    for(let l = arrayCell.length; l > arrayCell.length - 2; l--){
+    for(let l = arrayCell.length; l > arrayCell.length - 1; l--){
       objThead += '<th></th>';
     }
     for (let i = 0; i < jSon.length; i++) {      
+      let className = jSon[i].Stat_name.replace(/\s+/g, ''); 
       objtbody += '<tr>' + 
       '<td>' + jSon[i].Act_observation+ '</td>'+
       '<td>' + jSon[i].Act_date+ '</td>'+
-      '<td><div class="square ' + jSon[i].Stat_name + ' mx-auto" title='+ jSon[i].Stat_name +'></div></td>' + 
-      '<td>' + jSon[i].Stat_name+ '</td></tr>';
+      '<td>' + jSon[i].Stat_name+ '</td>'+
+      '<td><div class="square ' + className + ' mx-auto" title='+ jSon[i].Stat_name +'></div></td></tr>';
     }
     objtbody += '</tbody>';
     objThead += '</thead>';
