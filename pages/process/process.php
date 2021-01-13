@@ -160,6 +160,13 @@ if (!isset($_SESSION['User'])) {
           </div>
         </section>
         <section class="site-section-process card-filter">
+          <div class="container">
+            <div class="row justify-content-end">
+              <div class="col-auto">
+                <a href="#" class="btn btn-success" id="btnExcel" onclick="fnExcelReport();">Descargar en excel <i class="fas fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
           <div class="container card-filter table-responsive table-process my-custom-scrollbar">
             <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableProcess" width="100%" cellspacing="0">
             </table>
@@ -232,7 +239,7 @@ if (!isset($_SESSION['User'])) {
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="perfomanceModalLabel">Detalle</h5>
+          <h5 class="modal-title" id="perfomanceModalLabel">Actuaciones</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -426,8 +433,11 @@ if (!isset($_SESSION['User'])) {
 
   <script src="../../js/main.js"></script>
   <script src="../../js/properties.js"></script>
+  
   <script src="js/process.js"></script>
   <script src="js/request.js"></script>
+  
+
   <?php include("../../php/viewHtml/jsLinks.php") ?>
 
   <script>
