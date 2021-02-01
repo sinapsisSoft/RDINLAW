@@ -196,15 +196,13 @@ if (!isset($_SESSION['User'])) {
             <div class="row">
               <div class="col-md-5 justify">
                 <h1 class="mb-0 site-logo"><img src="../../images/logo-02.png" style="width: 60%;" alt=""></h1>
-                <hr>
-                <p>Novedosa firma de abogados especializada en el manejo, estudio e investigación íntegra del área jurídica, diseñada para brindar asesoría y blindaje legal a empresas y personas naturales.</p>
               </div>
               <div class="col-md-3 ml-auto">
                 <h2 class="footer-heading mb-4">Accesos rápidos</h2>
                 <ul class="list-unstyled">
-                  <li><a href="index.html#about-section" class="smoothscroll">Nosotros</a></li>
-                  <li><a href="index.html#services-section" class="smoothscroll">Servicios</a></li>
-                  <li><a href="index.html#contact-section" class="smoothscroll">Contáctanos</a></li>
+                  <li><a href="../../index.html#about-section" class="smoothscroll" target="_blank">Nosotros</a></li>
+                  <li><a href="../../index.html#services-section" class="smoothscroll" target="_blank">Servicios</a></li>
+                  <li><a href="../../index.html#contact-section" class="smoothscroll" target="_blank">Contáctanos</a></li>
                 </ul>
               </div>
               <div class="col-md-3 footer-social">
