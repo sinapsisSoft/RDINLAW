@@ -163,6 +163,10 @@ if (!isset($_SESSION['User'])) {
           <div class="container">
             <div class="row justify-content-end">
               <div class="col-auto">
+                <label for="Proc_active" class="col-form-label">Procesos activos:</label>
+                <label id="Proc_active"></label>
+              </div>
+              <div class="col-auto">
                 <a href="#" class="btn btn-success" id="btnExcel" onclick="fnExcelReport();">Descargar en excel <i class="fas fa-plus"></i></a>
               </div>
             </div>
@@ -282,7 +286,7 @@ if (!isset($_SESSION['User'])) {
                 <input type="text" class="form-control read" id="Proc_office">
               </div>
               <div class="form-group col-lg-4 col-sm-12">
-                <label for="Proc_officeEmail" class="col-form-label">E-mail despacho</label>
+                <label for="Proc_officeEmail" class="col-form-label">Parte que autoriza</label>
                 <input type="text" class="form-control read" id="Proc_officeEmail">
               </div>
               <div class="form-group col-lg-4 col-sm-12">

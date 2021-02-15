@@ -26,6 +26,7 @@ function getDataUser(data, type) {
             document.getElementById("User_email").innerHTML = data[0]["User_email"];
             document.getElementById("User_id").innerHTML = data[0]["User_id"];
             getDataProcess(data[0]["User_email"],0);
+            getDataProcess(data[0]["User_email"],3);
           }
         }
       }
@@ -63,6 +64,11 @@ function getDataProcess(data, type) {
             disableForm('processDetailForm');
             viewModal('detailProcess',0);
           }
+          if(type == 3){
+            for (let key in jsonObj[0]) {
+              document.getElementById(key).innerHTML = jsonObj[0][key];
+            }
+          }
         }
       }
     };
@@ -74,6 +80,9 @@ function getDataProcess(data, type) {
     }   
     if(type == 2){
       JsonData = '{"GET":"GET_PROCESS_DETAIL","Proc_id":"' + data + '"}';
+    }
+    if(type == 3){
+      JsonData = '{"GET":"GET_PROC_CLIENT_COUNT","User_email":"' + data + '"}';
     }
     xhttp.send(JsonData);
   } catch (error) {
