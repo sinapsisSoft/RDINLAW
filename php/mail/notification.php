@@ -33,7 +33,7 @@ class Notification {
   {    
       $this->to ="informacion@rdinlaw.com";
       $this ->title = 'Registro de nueva solicitud';
-      $banner = 'http://www.rdinlaw.com/test/images/mail/banner1.png';//Cambiar cuando ya tengan el certificado de seguridad
+      $banner = 'https://www.rdinlaw.com/test/images/mail/banner1.png';//Cambiar cuando ya tengan el certificado de seguridad
       $footer = 'https://www.sinapsistechnologies.com.co/assets/img/mail/logo_white.png';
       $headerColor = '#01416d';
       $footerColor = '#39312f';
@@ -51,7 +51,7 @@ class Notification {
                   <tr>
                     <td class="inner contents">
                       <br>
-                      <p class="textBanner">Hola, Research & Development in Law</p>
+                      <p class="textBanner">Hola Research & Development in Law</p>
                       <br>
                       <p class="h1">Saludo Cordial,</p>
                       <br>
