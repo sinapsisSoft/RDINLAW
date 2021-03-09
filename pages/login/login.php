@@ -56,14 +56,14 @@
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
+					<!-- <div class="text-center p-t-12">
 						<span class="txt1">
 							Olvidó
 						</span>
 						<a class="txt2" href="#">
 							su contraseña?
 						</a>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>
