@@ -161,7 +161,17 @@ if (!isset($_SESSION['User'])) {
         </section>
         <section class="site-section-process card-filter">
           <div class="container">
-            <div class="row justify-content-end">
+            <div class="row">
+              <form id="formSearchField" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-7">
+                <div class="form-row">
+                  <div class="form-group col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="Name" placeholder="Búsqueda general">
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <button type="submit" class="btn btn-primary mb-2" onclick="searchProcessField(event);return false"><i class="icon-search"></i></button>
+                  </div>
+                </div>
+              </form>
               <div class="col-auto">
                 <label for="Proc_active" class="col-form-label">Procesos activos:</label>
                 <label id="Proc_active"></label>
@@ -170,6 +180,9 @@ if (!isset($_SESSION['User'])) {
                 <a href="#" class="btn btn-success" id="btnExcel" onclick="fnExcelReport();">Descargar en excel <i class="fas fa-plus"></i></a>
               </div>
             </div>
+          </div>
+          <div class="container mt-3">
+            
           </div>
           <div class="container card-filter table-responsive table-process my-custom-scrollbar">
             <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableProcess" width="100%" cellspacing="0">
@@ -435,10 +448,10 @@ if (!isset($_SESSION['User'])) {
 
   <script src="../../js/main.js"></script>
   <script src="../../js/properties.js"></script>
-  
+
   <script src="js/process.js"></script>
   <script src="js/request.js"></script>
-  
+
 
   <?php include("../../php/viewHtml/jsLinks.php") ?>
 

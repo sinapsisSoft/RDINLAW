@@ -25,7 +25,7 @@ function getDataUser(data, type) {
             document.getElementById("User_identification").innerHTML = jsonObj[0]["User_identification"];
             document.getElementById("User_email").innerHTML = data[0]["User_email"];
             document.getElementById("User_id").innerHTML = data[0]["User_id"];
-            getDataProcess(data[0]["User_email"],0);
+            getDataProcess("",0);
             getDataProcess(data[0]["User_email"],3);
           }
         }
@@ -73,7 +73,9 @@ function getDataProcess(data, type) {
       }
     };
     if(type == 0){
-      JsonData = '{"GET":"GET_PROCESS_USER","User_email":"' + data + '"}';
+      let obj=new StoragePage();
+      let user = JSON.parse(obj.getStorageLogin());
+      JsonData = '{"GET":"GET_PROCESS_USER","User_email":"' + user[0]["User_email"] + '","Name":"' + data + '"}';
     }
     if(type == 1){
       JsonData = '{"GET":"GET_PERFORMANCE_PROCESS","Proc_id":"' + data + '"}';
@@ -172,6 +174,23 @@ function getDataProcess(data, type) {
     jsonObj1.sort(getSorted(order[0],order[1]));
     createtableProcess('tableProcess', arrayCell, jsonObj1);
   }
+
+//************SEARCH ANY PROCESS FIELD**************//
+function searchProcessField(e) {
+  try {
+    var objForm = document.getElementById('formSearchField');
+    let intLogForm = objForm.querySelectorAll('input').length;
+    let jsonData = '';    
+    for (let i = 0; i < intLogForm; i++) {
+      jsonData = objForm[i].value;
+    }
+    getDataProcess(jsonData, 0);
+  }
+  catch (error) {
+    console.error(error);
+  }
+  e.preventDefault();
+}
 
   function getSorted(prop, order){
     return function(a,b){
