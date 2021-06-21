@@ -33,6 +33,8 @@ if (!isset($_SESSION['User'])) {
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="css/process.css">
   <link rel="stylesheet" href="css/request.css">
+  <link rel='stylesheet' href='../../vendor/fullcalendar/css/main.css'/>
+  <link rel='stylesheet' href='../../css/bootstrap-select.css'/>
 
 </head>
 
@@ -115,7 +117,7 @@ if (!isset($_SESSION['User'])) {
                 </p>
               </div>
               <div class="col-auto" data-toggle="tooltip" data-placement="top" title="Revisar calendario">
-                <a data-toggle="modal" data-target="#calendar" style="color: darkcyan; cursor: pointer;"><i class="icon-calendar" style="font-size: 62px;"></i></a>
+                <button data-toggle="modal" data-target="#calendarModal" style="color: darkcyan; cursor: pointer;" onclick="getClientCalendar()"><i class="icon-calendar" style="font-size: 62px;"></i></button>
               </div>
             </div>
           </div>
@@ -412,9 +414,8 @@ if (!isset($_SESSION['User'])) {
     </div>
   </div>
   <!-- Fin Requests Modal -->
-
   <!-- Calendar modal -->
-  <div class="modal fade" id="calendar" tabindex="-1" aria-labelledby="calendarLabel" aria-hidden="true">
+  <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -424,6 +425,31 @@ if (!isset($_SESSION['User'])) {
           </button>
         </div>
         <div class="modal-body my-custom-scrollbar">
+          <div class="row">
+            <div id='calendar' class="col-8"></div>
+            <div id="eventInfo" class="col-4" style="display: none;">
+              <div class="form-row">
+                <input type="hidden" name="Event_id" id="Event_id" value="0">
+                <div class="col-12">
+                  <label for="Event_title">Título</label>
+                  <input type="text" class="form-control is-valid" name="Event_title" id="Event_title" readonly>
+                </div>
+                <input type="hidden" name="Event_color" id="Event_color" class="form-group">
+                <div class="col-12">
+                  <label for="Event_start">Fecha Inicial</label>
+                  <input type="text" class="form-control is-valid" name="Event_start" id="Event_start" readonly>
+                </div>
+                <div class="col-12">
+                  <label for="Event_end">Fecha Final</label>
+                  <input type="text" class="form-control is-valid" name="Event_end" id="Event_end" readonly>
+                </div>
+                <div class="col-12">
+                  <label for="Event_location">Ubicación</label>
+                  <input type="text" class="form-control is-valid" name="Event_location" id="Event_location" readonly>
+                </div>
+              </div>
+            </div>
+          </div>     
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -445,12 +471,15 @@ if (!isset($_SESSION['User'])) {
   <script src="../../js/jquery.sticky.js"></script>
   <script src="../../js/isotope.pkgd.min.js"></script>
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
   <script src="../../js/main.js"></script>
   <script src="../../js/properties.js"></script>
 
   <script src="js/process.js"></script>
   <script src="js/request.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src='../../vendor/fullcalendar/js/main.js'></script>
 
 
   <?php include("../../php/viewHtml/jsLinks.php") ?>
