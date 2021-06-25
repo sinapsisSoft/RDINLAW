@@ -857,6 +857,7 @@ A HORIZONTAL event
 .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
   margin-right: 2px;
+  cursor: pointer;
 }
 .fc-direction-ltr .fc-daygrid-week-number {
     left: 0;

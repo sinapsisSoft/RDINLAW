@@ -117,7 +117,7 @@ if (!isset($_SESSION['User'])) {
                 </p>
               </div>
               <div class="col-auto" data-toggle="tooltip" data-placement="top" title="Revisar calendario">
-                <button data-toggle="modal" data-target="#calendarModal" style="color: darkcyan; cursor: pointer;" onclick="getClientCalendar()"><i class="icon-calendar" style="font-size: 62px;"></i></button>
+                <button data-toggle="modal" data-target="#calendarModal" style="color: darkcyan; cursor: pointer;background-color: transparent; border: none;" onclick="getClientCalendar()"><i class="icon-calendar" style="font-size: 62px;"></i></button>
               </div>
             </div>
           </div>
@@ -428,26 +428,24 @@ if (!isset($_SESSION['User'])) {
           <div class="row">
             <div id='calendar' class="col-8"></div>
             <div id="eventInfo" class="col-4" style="display: none;">
-              <div class="form-row">
-                <input type="hidden" name="Event_id" id="Event_id" value="0">
-                <div class="col-12">
-                  <label for="Event_title">Título</label>
-                  <input type="text" class="form-control is-valid" name="Event_title" id="Event_title" readonly>
+              <form id="calendarInfo">
+                <div class="form-row">
+                  <input type="hidden" name="Event_id" id="Event_id" value="0">
+                  <div class="col-12">
+                    <label id="lblEvent_title" for="Event_title">Título</label>
+                    <input type="text" class="form-control" name="Event_title" id="Event_title" readonly>
+                  </div>
+                  <input type="hidden" name="Event_color" id="Event_color" class="form-group">
+                  <div class="col-12">
+                    <label for="Event_start">Fecha Inicial</label>
+                    <input type="text" class="form-control" name="Event_start" id="Event_start" readonly>
+                  </div>
+                  <div class="col-12">
+                    <label for="Event_end">Fecha Final</label>
+                    <input type="text" class="form-control" name="Event_end" id="Event_end" readonly>
+                  </div>
                 </div>
-                <input type="hidden" name="Event_color" id="Event_color" class="form-group">
-                <div class="col-12">
-                  <label for="Event_start">Fecha Inicial</label>
-                  <input type="text" class="form-control is-valid" name="Event_start" id="Event_start" readonly>
-                </div>
-                <div class="col-12">
-                  <label for="Event_end">Fecha Final</label>
-                  <input type="text" class="form-control is-valid" name="Event_end" id="Event_end" readonly>
-                </div>
-                <div class="col-12">
-                  <label for="Event_location">Ubicación</label>
-                  <input type="text" class="form-control is-valid" name="Event_location" id="Event_location" readonly>
-                </div>
-              </div>
+              </form>              
             </div>
           </div>     
         </div>

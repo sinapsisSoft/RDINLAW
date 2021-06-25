@@ -53,7 +53,7 @@ function getDataEvent(dataSetEvent, typeSend) {
         if (json.length != 0) {
           if (typeSend == 0) {
             setCalendar(json);
-            enableScroll();
+            enableScroll();            
           }   
         } else {
           setCalendar(json);
@@ -108,10 +108,18 @@ function setCalendar(json) {
       $('#calendarModal #Event_color').val(arg.event.borderColor);
       $('#calendarModal #Event_start').val(moment(arg.event.start).format('YYYY-MM-DD HH:mm:ss'));
       $('#calendarModal #Event_end').val(moment(arg.event.end).format('YYYY-MM-DD HH:mm:ss'));
-      $('#calendarModal #Event_location').val(arg.event.url);
       $('#eventInfo').fadeIn();
+      document.getElementById('lblEvent_title').scrollIntoView({behavior: "smooth"});
     },
     events: jsonData    
   }); 
   calendar.render();
 }
+
+$("#calendarModal").on('hidden.bs.modal', function () {
+  objForm = document.getElementById("calendarInfo");
+  for (let i = 0; i < objForm.length; i++) {
+    objForm[i].value = "";
+  }
+  $('#eventInfo').fadeOut();
+});
