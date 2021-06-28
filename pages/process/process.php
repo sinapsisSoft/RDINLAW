@@ -427,12 +427,13 @@ if (!isset($_SESSION['User'])) {
         <div class="modal-body my-custom-scrollbar">
           <div class="row">
             <div id='calendar' class="col-8"></div>
-            <div id="eventInfo" class="col-4" style="display: none;">
+            <div id="eventInfo" class="col-4">
               <form id="calendarInfo">
+                <h3 id="Event_info">Información del evento</h3>
                 <div class="form-row">
                   <input type="hidden" name="Event_id" id="Event_id" value="0">
                   <div class="col-12">
-                    <label id="lblEvent_title" for="Event_title">Título</label>
+                    <label for="Event_title">Título</label>
                     <input type="text" class="form-control" name="Event_title" id="Event_title" readonly>
                   </div>
                   <input type="hidden" name="Event_color" id="Event_color" class="form-group">

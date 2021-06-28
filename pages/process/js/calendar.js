@@ -108,8 +108,7 @@ function setCalendar(json) {
       $('#calendarModal #Event_color').val(arg.event.borderColor);
       $('#calendarModal #Event_start').val(moment(arg.event.start).format('YYYY-MM-DD HH:mm:ss'));
       $('#calendarModal #Event_end').val(moment(arg.event.end).format('YYYY-MM-DD HH:mm:ss'));
-      $('#eventInfo').fadeIn();
-      document.getElementById('lblEvent_title').scrollIntoView({behavior: "smooth"});
+      document.getElementById('Event_info').scrollIntoView({behavior: "smooth"});
     },
     events: jsonData    
   }); 
@@ -121,5 +120,4 @@ $("#calendarModal").on('hidden.bs.modal', function () {
   for (let i = 0; i < objForm.length; i++) {
     objForm[i].value = "";
   }
-  $('#eventInfo').fadeOut();
 });
