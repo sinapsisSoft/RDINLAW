@@ -460,14 +460,14 @@ body:after {
       padding: 10px 20px;
       display: block;
       position: relative;
-      color: #e29216; }
+      color: #ebcaa8; }
       .site-mobile-menu .site-nav-wrap a:hover {
         color: #e29116; }
     .site-mobile-menu .site-nav-wrap li {
       position: relative;
       display: block; }
       .site-mobile-menu .site-nav-wrap li .active {
-        color: #ffffff; }
+        color: #e29116; }
     .site-mobile-menu .site-nav-wrap .social {
       display: inline-block; }
     .site-mobile-menu .site-nav-wrap .arrow-collapse {
