@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>RDL - Ingreso al sistema</title>
-  <link rel="icon" href="../../images/favicon1.ico">
+  <link rel="icon" href="../../images/favicon3.ico">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -27,7 +27,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-          <a href="../../index.html"><img src="../../images/logo-01.png" alt="IMG"></a>					
+          <a href="../../index.html"><img src="../../images/logo-05.png" alt="IMG"></a>					
 				</div>
 
 				<form class="login100-form validate-form" method="POST" id="form_login" onsubmit="sendData(this.id);return false">

@@ -12,7 +12,7 @@ if (!isset($_SESSION['User'])) {
 
 <head>
   <title>RDL - Seguimiento de expedientes</title>
-  <link rel="icon" href="../../images/favicon1.ico">
+  <link rel="icon" href="../../images/favicon3.ico">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -63,7 +63,7 @@ if (!isset($_SESSION['User'])) {
         <div class="row align-items-center">
           <div class="col-6 col-xl-2">
             <h1 class="mb-0 site-logo">
-              <a href="../../index.html"><img src="../../images/logo-02.png" style="width: 150px;" alt=""></a>
+              <a href="../../index.html"><img src="../../images/logo-03.png" style="width: 150px; margin-top: 26px;" alt=""></a>
             </h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
@@ -214,7 +214,7 @@ if (!isset($_SESSION['User'])) {
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-5 justify">
-                <h1 class="mb-0 site-logo"><img src="../../images/logo-02.png" style="width: 60%;" alt=""></h1>
+                <h1 class="mb-0 site-logo"><img src="../../images/logo-04.png" style="width: 90%;" alt=""></h1>
               </div>
               <div class="col-md-3 ml-auto">
                 <h2 class="footer-heading mb-4">Accesos rápidos</h2>

@@ -25,6 +25,15 @@
   src: url('../../../fonts/montserrat/Montserrat-Bold.ttf'); 
 }
 
+@font-face {
+  font-family: "Mainlux Light";
+  src: url('../../../fonts/mainlux/FontsFree-Net-Mainlux-Light.ttf');
+}
+
+@font-face {
+  font-family: "Argesta Display Regular";
+  src: url('../../../fonts/argesta/argesta-display-regular.otf');
+}
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
@@ -36,12 +45,12 @@
 
 body, html {
 	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
+	font-family: "Mainlux Light";
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: Poppins-Regular;
+	font-family: "Argesta Display Regular";
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -67,7 +76,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Poppins-Regular;
+	font-family: "Argesta Display Regular";
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -134,14 +143,14 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Poppins-Regular;
+  font-family: "Argesta Display Regular";
   font-size: 13px;
   line-height: 1.5;
   color: #999999;
 }
 
 .txt2 {
-  font-family: Poppins-Regular;
+  font-family: "Argesta Display Regular";
   font-size: 13px;
   line-height: 1.5;
   color: #666666;
@@ -168,16 +177,16 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #576ee2;
-  background: -webkit-linear-gradient(-135deg, #01416d, #576ee2);
-  background: -o-linear-gradient(-135deg, #01416d, #576ee2);
-  background: -moz-linear-gradient(-135deg, #01416d, #576ee2);
-  background: linear-gradient(-135deg, #01416d, #576ee2);
+  background: #432849;
+  background: -webkit-linear-gradient(0deg, #432849, #e2911b);
+  background: -o-linear-gradient(0deg, #432849, #e2911b);
+  background: -moz-linear-gradient(0deg, #432849, #e2911b);
+  background: linear-gradient(0deg, #432849, #e2911b);
 }
 
 .wrap-login100 {
   width: 960px;
-  background: #fff;
+  background: #ebcaa8;
   border-radius: 10px;
   overflow: hidden;
 
@@ -195,7 +204,7 @@ iframe {
 [  ]*/
 .login100-pic {
   width: 316px;
-  margin: 0px auto;
+  margin: 0px 0px 0px 0px;
   padding-top: 15%;
 }
 
@@ -211,7 +220,7 @@ iframe {
 }
 
 .login100-form-title {
-  font-family: Poppins-Bold;
+  font-family: "Mainlux Light" !important;
   font-size: 24px;
   color: #333333;
   line-height: 1.2;
@@ -232,7 +241,7 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Medium;
+  font-family: "Argesta Display Regular";
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
@@ -325,7 +334,7 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Montserrat-Bold;
+  font-family: "Argesta Display Regular";
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
@@ -334,7 +343,7 @@ iframe {
   width: 100%;
   height: 50px;
   border-radius: 25px;
-  background: #007bff;
+  background: #e2911b;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -351,7 +360,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background: #cf7c2e;
+  background: #f5a530;
 }
 
 
