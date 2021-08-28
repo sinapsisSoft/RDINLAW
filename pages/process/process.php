@@ -46,7 +46,13 @@ if (!isset($_SESSION['User'])) {
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-
+  <!-- Guía de uso -->
+  <div class="actionLeft">
+    <div class="cont-float" data-toggle="tooltip" data-placement="top" title="Revise la guía rápida de uso de la plataforma">
+      <a href="https://ior.ad/7nXD" target="_blank" title="Guía de apoyo"><i class="flaticon-signo-de-exclamacion-dentro-de-un-circulo"></i></a>
+    </div>
+  </div>
+  <!-- Fin guía de uso -->
   <div class="site-wrap">
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">

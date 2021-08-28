@@ -4109,16 +4109,16 @@ var FullCalendar = (function (exports) {
             prevYear: 'prev year',
             nextYear: 'next year',
             year: 'year',
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day',
-            list: 'list'
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            list: 'Lista'
         },
         weekText: 'W',
-        allDayText: 'all-day',
-        moreLinkText: 'more',
-        noEventsText: 'No events to display'
+        allDayText: 'Todo-Día',
+        moreLinkText: 'Más',
+        noEventsText: 'No hay eventos para mostrar'
     };
     function organizeRawLocales(explicitRawLocales) {
         var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'en';
