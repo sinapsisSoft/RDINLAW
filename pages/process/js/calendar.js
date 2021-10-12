@@ -1,11 +1,7 @@
 clientId = 0;
 
-function getClientCalendar(){
-  email = document.getElementById("User_email").innerHTML;
-  getDataClient(email,0);
-  setTimeout(() => {
-    getDataEvent('',0);
-  }, 1500);
+function getClientCalendar(){  
+  getDataEvent('',0);
 }
 
 //**Function get Client ID **/
@@ -97,11 +93,17 @@ function setCalendar(json) {
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
     defaultDate: getDate,
-    editable: false,
+    editable: true,
     eventLimit: true,
     selectable: true,
     selectHelper: true,
     navLinks: true, // can click day/week names to navigate views
+    select: function (arg) {
+      $('#selectEvent').fadeOut();
+      $('#addEvent').fadeIn();      
+      cleanForm("calendarInfo");
+      cleanForm("addForm");
+    },
     eventClick: function (arg) {
       $('#calendarModal #Event_id').val(arg.event.id);
       $('#calendarModal #Event_title').val(arg.event.title);
@@ -115,9 +117,122 @@ function setCalendar(json) {
   calendar.render();
 }
 
+function addEvent(obj) {
+  id = obj["Event_id"].value;
+  start = obj["Event_start"].value;
+  end = obj["Event_end"].value;
+  title = obj["Event_title"].value;
+  color = obj["Event_color"].value;
+
+  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"'+':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","Client_id"' + ':' + '"' + clientId + '"';
+  
+  try {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", ajaxCalendar, true);
+    xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        var jsonObj = JSON.parse(xhttp.responseText);
+        if (jsonObj == 1) {
+          createAlert("Exitoso","Evento creado con éxito", "success", 0);  
+        }
+        else {
+          createAlert("Hubo un error","No se pudo crear el evento", "error", 0);
+        }
+        $('#calendarModal').modal('hide');
+      }
+    };
+    JsonData = '{"POST":"POST",' + JsonData + '}';
+    xhttp.send(JsonData);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function edit(arg) {
+  start = moment(arg.event.start).format('YYYY-MM-DD HH:mm:ss');
+  if (arg.event.end) {
+    end = moment(arg.event.end).format('YYYY-MM-DD HH:mm:ss');
+  } else {
+    end = start;
+  }
+  id = arg.event.id;
+  title = arg.event.title;
+  color = arg.event.color;
+  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"' + ':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","Client_id"' + ':' + '"' + clientId + '"';
+
+  try {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", ajaxCalendar, true);
+    xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        var jsonObj = JSON.parse(xhttp.responseText);
+        if (jsonObj.length != 0) {
+          createAlert("Exitoso","Evento editado con éxito", "success", 0);  
+        } else {
+          createAlert("Hubo un error","No puedo ser editado el evento", "error", 0);  
+
+        }  
+      }
+    };
+    JsonData = '{"POST":"POST",' + JsonData + '}';
+    xhttp.send(JsonData);
+  } catch (error) {
+    console.error(error);
+  }
+  calendar.render();
+}
+
+function deleteEvent(idForm) {
+  var obj = document.getElementById(idForm);
+  id = obj["Event_id"].value;
+  start = obj["Event_start"].value;
+  end = obj["Event_end"].value;
+  title = obj["Event_title"].value;
+  color = obj["Event_color"].value;
+  
+  if (confirm("Esta seguro de eliminar este evento")) {
+    try {
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", ajaxCalendar, true);
+      xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          var jsonObj = JSON.parse(xhttp.responseText);
+          if (jsonObj == 1) {
+            createAlert("Exitoso", "Evento eliminado con éxito", "success", 0);
+
+          } else {
+            createAlert("Hubo un error", "El evento no pudo ser eliminado", "error", 0);
+
+          }
+          $('#modalEdit').modal('hide');
+        }
+      };
+      JsonData = '{"POST":"DELETE","Event_id":"' + id + '"}';
+      xhttp.send(JsonData);
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    return false;
+  }
+}
+
+$("#closeAddEvent").click(function(){
+  $('#selectEvent').fadeIn();
+  $('#addEvent').fadeOut(); 
+  cleanForm("calendarInfo");
+  cleanForm("addForm");
+});
+
+function cleanForm(idForm){
+  document.getElementById(idForm).reset();
+}
+
 $("#calendarModal").on('hidden.bs.modal', function () {
   objForm = document.getElementById("calendarInfo");
-  for (let i = 0; i < objForm.length; i++) {
-    objForm[i].value = "";
-  }
+  cleanForm("calendarInfo");
+  cleanForm("addForm");
 });

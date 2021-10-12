@@ -8,7 +8,7 @@ if (!isset($_SESSION['User'])) {
 }
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <title>RDL - Seguimiento de expedientes</title>
@@ -33,8 +33,7 @@ if (!isset($_SESSION['User'])) {
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="css/process.css">
   <link rel="stylesheet" href="css/request.css">
-  <link rel='stylesheet' href='../../vendor/fullcalendar/css/main.css'/>
-  <link rel='stylesheet' href='../../css/bootstrap-select.css'/>
+  <link rel='stylesheet' href='../../vendor/fullcalendar/css/main.css' />
 
 </head>
 
@@ -116,6 +115,7 @@ if (!isset($_SESSION['User'])) {
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12">
                 <span id="Comp_id" hidden=""></span>
                 <input id="User_id" hidden="">
+                <input id="Client_id" hidden="">
                 <h5 id="labelName" class="card-title"></h5>
                 <p class="card-text">
                   <strong>NIT.: </strong><span id="User_identification"></span><br>
@@ -190,7 +190,7 @@ if (!isset($_SESSION['User'])) {
             </div>
           </div>
           <div class="container mt-3">
-            
+
           </div>
           <div class="container card-filter table-responsive table-process my-custom-scrollbar">
             <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableProcess" width="100%" cellspacing="0">
@@ -433,28 +433,63 @@ if (!isset($_SESSION['User'])) {
         <div class="modal-body my-custom-scrollbar">
           <div class="row">
             <div id='calendar' class="col-8"></div>
-            <div id="eventInfo" class="col-4">
-              <form id="calendarInfo">
-                <h3 id="Event_info">Información del evento</h3>
+            <div id="selectEvent" class="col-4">
+              <div id="eventInfo">
+                <form id="calendarInfo">
+                  <h3 id="Event_info">Información del evento</h3>
+                  <div class="form-row">
+                    <input type="hidden" name="Event_id" id="Event_id" value="0">
+                    <div class="col-12">
+                      <label for="Event_title">Título</label>
+                      <input type="text" class="form-control" name="Event_title" id="Event_title" readonly>
+                    </div>
+                    <input type="hidden" name="Event_color" id="Event_color" class="form-group">
+                    <div class="col-12">
+                      <label for="Event_start">Fecha Inicial</label>
+                      <input type="text" class="form-control" name="Event_start" id="Event_start" readonly>
+                    </div>
+                    <div class="col-12">
+                      <label for="Event_end">Fecha Final</label>
+                      <input type="text" class="form-control" name="Event_end" id="Event_end" readonly>
+                    </div>
+                  </div>
+                  <div class="mt-4 col-12">
+                    <button id="closeEditEvent" type="button" class="btn btn-secondary">Cerrar</button>
+                    <button type="button" onclick="deleteEvent('calendarInfo');" class="btn btn-danger" id="delete" name="Eliminar">Eliminar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div id="addEvent" class="col-4" style="display: none;">
+              <form class="form-horizontal" method="POST" id="addForm" onsubmit="addEvent(this);return false">
+                <h3 id="Event_info">Crear evento</h3>
                 <div class="form-row">
                   <input type="hidden" name="Event_id" id="Event_id" value="0">
                   <div class="col-12">
-                    <label for="Event_title">Título</label>
-                    <input type="text" class="form-control" name="Event_title" id="Event_title" readonly>
+                    <label for="Event_title">Titulo</label>
+                    <input type="text" class="form-control" name="Event_title" id="Event_title" required>
                   </div>
-                  <input type="hidden" name="Event_color" id="Event_color" class="form-group">
+                  <div class="mt-2 col-12">
+                    <label for="Event_color">Color</label>
+                    <input type="color" name="Event_color" id="Event_color" class="form-group" placeholder="Color" required>
+                  </div>
                   <div class="col-12">
                     <label for="Event_start">Fecha Inicial</label>
-                    <input type="text" class="form-control" name="Event_start" id="Event_start" readonly>
+                    <input type="datetime-local" class="form-control" name="Event_start" id="Event_start" placeholder="Inicio" required>
                   </div>
                   <div class="col-12">
                     <label for="Event_end">Fecha Final</label>
-                    <input type="text" class="form-control" name="Event_end" id="Event_end" readonly>
+                    <input type="datetime-local" class="form-control" name="Event_end" id="Event_end" placeholder="Fin" required>
                   </div>
                 </div>
-              </form>              
+                <div class="mt-4 col-12">
+                  <button id="closeAddEvent" type="button" class="btn btn-secondary">Cerrar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+              </form>
             </div>
-          </div>     
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -463,6 +498,50 @@ if (!isset($_SESSION['User'])) {
     </div>
   </div>
   <!-- Fin Calendar Modal -->
+  <!-- Modal Edit-->
+  <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalAdd" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <div class="modal-content">
+        <form class="form-horizontal" method="POST" id="editForm" onsubmit="deleteEvent(false); return false">
+          <input type="hidden" name="Event_id" id="Event_id">
+          <input type="hidden" name="Event_start" id="Event_start">
+          <input type="hidden" name="Event_end" id="Event_end">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Evento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="col-10 ">
+                <label for="Event_title">Titulo</label>
+                <input type="text" class="form-control is-valid" name="Event_title" id="Event_title" placeholder="Título del evento" required>
+                <div class="valid-feedback">
+                  Campo diligenciado!
+                </div>
+                <div class="invalid-feedback">
+                  Verifique la información
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="Event_color">Color</label>
+                <input type="color" name="Event_color" id="Event_color" class="form-group" placeholder="Color" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="deleteEvent(true);" style=" left: 20px;position: absolute;" class="btn btn-danger" id="delete" name="delete"><span class="material-icons">
+                delete
+              </span></button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="../../js/jquery-3.5.1.min.js"></script>
   <script src="../../js/jquery-ui.js"></script>

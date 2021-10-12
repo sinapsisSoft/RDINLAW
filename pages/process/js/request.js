@@ -100,7 +100,7 @@ function setDataRequest(dataSetRequest, typeSend) {
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
       let className = jSon[i].Stat_name.replace(/\s+/g, ''); 
-      objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Req_subject + '</td><td>' + jSon[i].Req_message + '</td><td>' + jSon[i].Act_date + '</td><td>' + jSon[i].Stat_name + '</td><td><div class="square ' + className + ' mx-auto" title='+ jSon[i].Stat_name +'></td><td style="text-align: center;"><button onclick="getDataRequest('+ jSon[i].Req_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-calendar"></i></button></td></tr>';
+      objtbody += '<tr><td>' + j + '</td><td>' + jSon[i].Req_subject + '</td><td>' + jSon[i].Req_message + '</td><td>' + jSon[i].Act_date + '</td><td>' + jSon[i].Stat_name + '</td><td><div class="square ' + className + ' mx-auto" title='+ jSon[i].Stat_name +'></td><td style="text-align: center;"><button onclick="getDataRequest('+ jSon[i].Req_id + ',1)" class="btn btn-primary" style="margin:0; padding:5px" value=""><i class="icon-clock-o"></i></button></td></tr>';
     }
     objtbody += '</tbody>';
     objThead += '</thead>';

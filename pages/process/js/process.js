@@ -9,6 +9,10 @@ function setGeneralInformation(){
   setTimeout(function(){ 
     getDataRequest("",0);             
   }, 1000);  
+  setTimeout(function(){
+    email = document.getElementById("User_email").innerHTML;  
+    getDataClient(email,0);
+  },1000)
 }
 
 function getDataUser(data, type) {
