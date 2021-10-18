@@ -114,12 +114,12 @@ if (!isset($_SESSION['User'])) {
             <div class="row d-flex justify-content-between">
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12">
                 <span id="Comp_id" hidden=""></span>
-                <input id="User_id" hidden="">
-                <input id="Client_id" hidden="">
+                <input type="hidden" id="User_id">
+                <input type="hidden" id="Client_id">
                 <h5 id="labelName" class="card-title"></h5>
                 <p class="card-text">
                   <strong>NIT.: </strong><span id="User_identification"></span><br>
-                  <strong>E-mail: </strong><span id="User_email"></span><br>
+                  <strong>E-mail del usuario actual: </strong><span id="User_email"></span><br>
                 </p>
               </div>
               <div class="col-auto" data-toggle="tooltip" data-placement="top" title="Revisar calendario">
@@ -438,7 +438,7 @@ if (!isset($_SESSION['User'])) {
                 <form id="calendarInfo">
                   <h3 id="Event_info">Información del evento</h3>
                   <div class="form-row">
-                    <input type="hidden" name="Event_id" id="Event_id" value="0">
+                    <input type="hidden" class="id" name="Event_id" id="Event_id" value="0">
                     <div class="col-12">
                       <label for="Event_title">Título</label>
                       <input type="text" class="form-control" name="Event_title" id="Event_title" readonly>
@@ -454,7 +454,6 @@ if (!isset($_SESSION['User'])) {
                     </div>
                   </div>
                   <div class="mt-4 col-12">
-                    <button id="closeEditEvent" type="button" class="btn btn-secondary">Cerrar</button>
                     <button type="button" onclick="deleteEvent('calendarInfo');" class="btn btn-danger" id="delete" name="Eliminar">Eliminar
                     </button>
                   </div>
@@ -465,7 +464,7 @@ if (!isset($_SESSION['User'])) {
               <form class="form-horizontal" method="POST" id="addForm" onsubmit="addEvent(this);return false">
                 <h3 id="Event_info">Crear evento</h3>
                 <div class="form-row">
-                  <input type="hidden" name="Event_id" id="Event_id" value="0">
+                  <input type="hidden" class="id" name="Event_id" id="Event_id" value="0">
                   <div class="col-12">
                     <label for="Event_title">Titulo</label>
                     <input type="text" class="form-control" name="Event_title" id="Event_title" required>
@@ -504,7 +503,7 @@ if (!isset($_SESSION['User'])) {
 
       <div class="modal-content">
         <form class="form-horizontal" method="POST" id="editForm" onsubmit="deleteEvent(false); return false">
-          <input type="hidden" name="Event_id" id="Event_id">
+          <input type="hidden" class="id" name="Event_id" id="Event_id">
           <input type="hidden" name="Event_start" id="Event_start">
           <input type="hidden" name="Event_end" id="Event_end">
           <div class="modal-header">
@@ -574,8 +573,8 @@ if (!isset($_SESSION['User'])) {
     });
   </script>
   <script>
-    window.onload = loadGeneralView();
-    setGeneralInformation();
+    // window.onload = loadGeneralView();
+    window.onload = setGeneralInformation();    
   </script>
 </body>
 

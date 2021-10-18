@@ -27,8 +27,8 @@ function getDataRequest(dataSetRequest, typeSend) {
       }
     };
     if (typeSend == 0) {
-      let user = document.getElementById("User_id").value;
-      JsonData = '{"GET":"GET_USER_REQUEST","User_id":"' + user + '"}';
+      let user = document.getElementById("Client_id").value;
+      JsonData = '{"GET":"GET_CLIENT_REQUEST","Client_id":"' + user + '"}';
     }  
     if (typeSend == 1) {
       JsonData = '{"GET":"GET_ACTION","Req_id":"' + dataSetRequest + '"}';
@@ -150,9 +150,11 @@ function setDataRequest(dataSetRequest, typeSend) {
     if (validatorForm(idForm)) {
       jSon = getDataForm(idForm);
       let user = document.getElementById("User_id");
+      let client = document.getElementById("Client_id");
       let dateNow = new Date();
       dateNow = dateNow.getFullYear() + "-" + month2digits(dateNow.getMonth()+1) + "-" + dateNow.getDate() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds();
       jSon += ',"'+user.id+'":'+'"'+user.value+'",';
+      jSon += '"'+client.id+'":'+'"'+client.value+'",';
       jSon += '"Act_date":'+'"'+dateNow+'"';
       setDataRequest(jSon, typeSend);  
     } else {

@@ -1,7 +1,8 @@
 clientId = 0;
 
 function getClientCalendar(){  
-  getDataEvent('',0);
+  clientId = document.getElementById("Client_id").value;
+  getDataEvent(clientId,0);
 }
 
 //**Function get Client ID **/
@@ -58,7 +59,7 @@ function getDataEvent(dataSetEvent, typeSend) {
       }
     };    
     if (typeSend == 0) {
-      JsonData = '{"GET":"GET_EVENT_CLIENT","Client_id":"' + clientId + '"}';
+      JsonData = '{"GET":"GET_EVENT_CLIENT","Client_id":"' + dataSetEvent + '"}';
     }  
 
     xhttp.send(JsonData);
@@ -101,10 +102,15 @@ function setCalendar(json) {
     select: function (arg) {
       $('#selectEvent').fadeOut();
       $('#addEvent').fadeIn();      
-      cleanForm("calendarInfo");
-      cleanForm("addForm");
+      clearForm("addForm", 1);
+      clearForm("calendarInfo", 1);
+      document.getElementById('Event_info').scrollIntoView({behavior: "smooth"});
     },
     eventClick: function (arg) {
+      clearForm("addForm", 1);
+      clearForm("calendarInfo", 1);
+      $('#selectEvent').fadeIn();
+      $('#addEvent').fadeOut();  
       $('#calendarModal #Event_id').val(arg.event.id);
       $('#calendarModal #Event_title').val(arg.event.title);
       $('#calendarModal #Event_color').val(arg.event.borderColor);

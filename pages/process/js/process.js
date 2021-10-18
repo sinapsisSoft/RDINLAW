@@ -8,11 +8,7 @@ function setGeneralInformation(){
   getDataUser(json,0);
   setTimeout(function(){ 
     getDataRequest("",0);             
-  }, 1000);  
-  setTimeout(function(){
-    email = document.getElementById("User_email").innerHTML;  
-    getDataClient(email,0);
-  },1000)
+  }, 2000);  
 }
 
 function getDataUser(data, type) {
@@ -26,17 +22,19 @@ function getDataUser(data, type) {
         var jsonObj = JSON.parse(xhttp.responseText);        
         if (jsonObj.length != 0) {
           if(type == 0){            
-            document.getElementById("User_identification").innerHTML = jsonObj[0]["User_identification"];
-            document.getElementById("User_email").innerHTML = data[0]["User_email"];
-            document.getElementById("User_id").innerHTML = data[0]["User_id"];
+            document.getElementById("labelName").innerHTML = jsonObj[0]["Client_name"];
+            document.getElementById("User_identification").innerHTML = jsonObj[0]["Client_identification"];
+            document.getElementById("User_email").innerHTML = jsonObj[0]["User_email"];
+            document.getElementById("User_id").value = jsonObj[0]["User_id"];
+            document.getElementById("Client_id").value = jsonObj[0]["Client_id"];
             getDataProcess("",0);
-            getDataProcess(data[0]["User_email"],3);
+            getDataProcess(jsonObj[0]["User_id"],3);
           }
         }
       }
     };
     if(type == 0){
-      JsonData = '{"GET":"GET_USER_ID","User_email":"' + data[0]["User_email"] + '"}';
+      JsonData = '{"GET":"GET_USER_CLIENT","User_id":"' + data[0]["User_id"] + '"}';
     }  
     xhttp.send(JsonData);
   } catch (error) {
@@ -79,7 +77,7 @@ function getDataProcess(data, type) {
     if(type == 0){
       let obj=new StoragePage();
       let user = JSON.parse(obj.getStorageLogin());
-      JsonData = '{"GET":"GET_PROCESS_USER","User_email":"' + user[0]["User_email"] + '","Name":"' + data + '"}';
+      JsonData = '{"GET":"GET_PROCESS_USER","User_id":"' + user[0]["User_id"] + '","Name":"' + data + '"}';
     }
     if(type == 1){
       JsonData = '{"GET":"GET_PERFORMANCE_PROCESS","Proc_id":"' + data + '"}';
@@ -88,7 +86,7 @@ function getDataProcess(data, type) {
       JsonData = '{"GET":"GET_PROCESS_DETAIL","Proc_id":"' + data + '"}';
     }
     if(type == 3){
-      JsonData = '{"GET":"GET_PROC_CLIENT_COUNT","User_email":"' + data + '"}';
+      JsonData = '{"GET":"GET_PROC_CLIENT_COUNT","User_id":"' + data + '"}';
     }
     xhttp.send(JsonData);
   } catch (error) {
