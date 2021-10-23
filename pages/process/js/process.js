@@ -1,5 +1,5 @@
 var jsonObj1 = "";
-var arrayCell = new Array("Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
+var arrayCell = new Array("# Interno","Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
 var arrayCell1 = new Array("Fecha de informe", "Actuación", "Inicio término", "Fin término", "Ubicación", "Anexo");
 
 function setGeneralInformation(){
@@ -120,7 +120,8 @@ function getDataProcess(data, type) {
       objThead += '<th></th>';
     }
     for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
-      objtbody += "<tr><td>" + jSon[i].Proc_city + "</td><td>" + jSon[i].Proc_origin + "</td><td>" + jSon[i].Proc_office + "</td><td>'" + jSon[i].Proc_filing + "</td><td>" + jSon[i].Proc_consecutive + "</td><td>" + jSon[i].Proc_attorney + "</td><td>" + jSon[i].Proc_plaintiff + "</td><td>" + jSon[i].Proc_defendant + "</td><td>" + jSon[i].Proc_status + "</td><td style='text-align: center;'><button onclick='getDataProcess("+ jSon[i].Proc_id + ",2)' class='btn btn-primary' style='margin:0; padding:5px' value=''><i class='icon-list-alt'></i></button></td><td style='text-align: center;'><button onclick='getDataProcess("+ jSon[i].Proc_id + ",1)' class='btn btn-primary' style='margin:0; padding:5px' value=''><i class='icon-history'></i></button></td></tr>";
+      let status = jSon[i].Proc_status === null ? "N/A": jSon[i].Proc_status;
+      objtbody += "<tr><td>" + jSon[i].Proc_internConsec + "</td><td>" + jSon[i].Proc_city + "</td><td>" + jSon[i].Proc_origin + "</td><td>" + jSon[i].Proc_office + "</td><td>'" + jSon[i].Proc_filing + "</td><td>" + jSon[i].Proc_consecutive + "</td><td>" + jSon[i].Proc_attorney + "</td><td>" + jSon[i].Proc_plaintiff + "</td><td>" + jSon[i].Proc_defendant + "</td><td>" + status + "</td><td style='text-align: center;'><button onclick='getDataProcess("+ jSon[i].Proc_id + ",2)' class='btn btn-primary' style='margin:0; padding:5px' value=''><i class='icon-list-alt'></i></button></td><td style='text-align: center;'><button onclick='getDataProcess("+ jSon[i].Proc_id + ",1)' class='btn btn-primary' style='margin:0; padding:5px' value=''><i class='icon-history'></i></button></td></tr>";
     }
     objtbody += '</tbody>';
     objThead += '</thead>';

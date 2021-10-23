@@ -123,7 +123,7 @@ if (!isset($_SESSION['User'])) {
                 </p>
               </div>
               <div class="col-auto" data-toggle="tooltip" data-placement="top" title="Revisar calendario">
-                <button data-toggle="modal" data-target="#calendarModal" style="color: darkcyan; cursor: pointer;background-color: transparent; border: none;" onclick="getClientCalendar()"><i class="icon-calendar" style="font-size: 62px;"></i></button>
+                <button style="color: darkcyan; cursor: pointer;background-color: transparent; border: none;" onclick="getClientCalendar()"><i class="icon-calendar" style="font-size: 62px;"></i></button>
               </div>
             </div>
           </div>
@@ -150,8 +150,8 @@ if (!isset($_SESSION['User'])) {
                   <option value="Proc_building-1">Edificio de Z-A</option>
                   <option value="Proc_origin-0">Origen de A-Z</option>
                   <option value="Proc_origin-1">Origen de Z-A</option>
-                  <option value="Proc_office-0">Despacho de A-Z</option>
-                  <option value="Proc_office-1">Despacho de Z-A</option>
+                  <option value="Proc_office-0">Despacho de 0-9</option>
+                  <option value="Proc_office-1">Despacho de 9-0</option>
                   <option value="Proc_filing-0">Radicado de 0-9</option>
                   <option value="Proc_filing-1">Radicado de 9-0</option>
                   <option value="Proc_consecutive-0">Consecutivo de 0-9</option>
@@ -454,7 +454,8 @@ if (!isset($_SESSION['User'])) {
                     </div>
                   </div>
                   <div class="mt-4 col-12">
-                    <button type="button" onclick="deleteEvent('calendarInfo');" class="btn btn-danger" id="delete" name="Eliminar">Eliminar
+                    <button type="button" class="btn btn-warning" id="addEventView" name="Crear">Crear
+                    <button type="button" onclick="deleteEvent('calendarInfo');" class="btn btn-danger" id="delete" name="Eliminar" style="display: none;">Eliminar
                     </button>
                   </div>
                 </form>

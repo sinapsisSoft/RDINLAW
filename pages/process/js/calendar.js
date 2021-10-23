@@ -2,13 +2,16 @@ clientId = 0;
 
 function getClientCalendar(){  
   clientId = document.getElementById("Client_id").value;
-  getDataEvent(clientId,0);
+  loadPageView();
+  $('#calendarModal').modal('show');
+  setTimeout(function(){ 
+    getDataEvent(clientId,0);           
+  }, 2000);    
 }
 
 //**Function get Client ID **/
 function getDataClient(dataSetEvent, typeSend) {
-  try {
-    loadPageView();
+  try {    
     var xhttp = new XMLHttpRequest();
     var JsonData;
     xhttp.open("POST", ajaxCalendar, true);
@@ -50,7 +53,7 @@ function getDataEvent(dataSetEvent, typeSend) {
         if (json.length != 0) {
           if (typeSend == 0) {
             setCalendar(json);
-            enableScroll();            
+            enableScroll();   
           }   
         } else {
           setCalendar(json);
@@ -77,6 +80,10 @@ function setCalendar(json) {
   var year = objDate.getFullYear();
   var getDate = year + "-" + (month + 1) + "-" + day;
   var calendarEl = document.getElementById('calendar');
+  document.getElementById("addEventView").addEventListener("click",function(){
+    $('#selectEvent').fadeOut();
+    $('#addEvent').fadeIn();
+  });
   $.each(json, function(idx, e){
     jsonData.push({
       id: "" + e.id + "",
@@ -101,7 +108,8 @@ function setCalendar(json) {
     navLinks: true, // can click day/week names to navigate views
     select: function (arg) {
       $('#selectEvent').fadeOut();
-      $('#addEvent').fadeIn();      
+      $('#addEvent').fadeIn();  
+      $('#delete').fadeOut();    
       clearForm("addForm", 1);
       clearForm("calendarInfo", 1);
       document.getElementById('Event_info').scrollIntoView({behavior: "smooth"});
@@ -111,6 +119,7 @@ function setCalendar(json) {
       clearForm("calendarInfo", 1);
       $('#selectEvent').fadeIn();
       $('#addEvent').fadeOut();  
+      $('#delete').fadeIn();
       $('#calendarModal #Event_id').val(arg.event.id);
       $('#calendarModal #Event_title').val(arg.event.title);
       $('#calendarModal #Event_color').val(arg.event.borderColor);
@@ -229,6 +238,7 @@ function deleteEvent(idForm) {
 $("#closeAddEvent").click(function(){
   $('#selectEvent').fadeIn();
   $('#addEvent').fadeOut(); 
+  $('#delete').fadeOut();  
   cleanForm("calendarInfo");
   cleanForm("addForm");
 });
