@@ -105,7 +105,7 @@ function getDataProcess(data, type) {
       if (j == 0) {
         objThead += '<tr class="thead-dark title">';
       }
-      objThead += '<th>' + arrayCell[j] + '</th>';
+      objThead += '<th class="text-nowrap">' + arrayCell[j] + '</th>';
       if (j == arrayCell.length) {
         objThead += '</tr>';
       }
