@@ -344,7 +344,7 @@
                             <div class="row form-group">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label class="text-black" for="name">Nombre</label>
-                                    <input type="text" id="name" class="form-control">
+                                    <input type="text" id="name" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-black" for="lastname">Apellido</label>
@@ -354,7 +354,7 @@
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label class="text-black" for="email">Correo electrónico</label>
-                                    <input type="email" id="email" class="form-control">
+                                    <input type="email" id="email" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-black" for="phone">Teléfono</label>
@@ -364,15 +364,25 @@
                             <div class="row form-group">
                                 <div class="col-md-12">
                                     <label class="text-black" for="subject">Asunto</label>
-                                    <input type="subject" id="subject" class="form-control">
+                                    <input type="subject" id="subject" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-12">
                                     <label class="text-black" for="message">Mensaje</label>
-                                    <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Escríbenos"></textarea>
+                                    <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Escríbenos" required></textarea>
                                 </div>
                             </div>
+                            <div class="row form-group">
+                              <div class="custom-control custom-checkbox ">
+                                <input type="checkbox" class="custom-control-input" id="customCheck" name="privacy"
+                                    data-rule="required" required>
+                                <label class="custom-control-label" for="customCheck">Aceptas políticas de
+                                    tratamiento de datos</label>
+                                <a href="documents/CONTRATO_HABEAS_DATA_CLIENTES&PROVEEDORES.pdf" target="_blank"> -
+                                    Ver política </a>
+                              </div>
+                          </div>
                             <div class="row form-group">
                                 <div class="col-md-12" id="html_element_captcha"></div>
                             </div>
@@ -404,6 +414,7 @@
                                     <li><a href="#services-section" class="smoothscroll">Servicios</a></li>
                                     <li><a href="#contact-section" class="smoothscroll">Contáctanos</a></li>
                                     <li><a href="pages/login/login.php" target="_blank" class="smoothscroll">Ingresa</a></li>
+                                    <li><a href="documents/CONTRATO_HABEAS_DATA_CLIENTES&PROVEEDORES.pdf" target="blank_" class="smoothscroll">Protección de datos</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 footer-social">
