@@ -1,11 +1,12 @@
 clientId = 0;
+userId = 0;
 
 function getClientCalendar(){  
-  clientId = document.getElementById("Client_id").value;
+  userId = document.getElementById("User_id").value;
   loadPageView();
   $('#calendarModal').modal('show');
   setTimeout(function(){ 
-    getDataEvent(clientId,0);           
+    getDataEvent(userId,0);           
   }, 2000);    
 }
 
@@ -62,7 +63,7 @@ function getDataEvent(dataSetEvent, typeSend) {
       }
     };    
     if (typeSend == 0) {
-      JsonData = '{"GET":"GET_EVENT_CLIENT","Client_id":"' + dataSetEvent + '"}';
+      JsonData = '{"GET":"GET_EVENT_CLIENT","User_id":"' + dataSetEvent + '"}';
     }  
 
     xhttp.send(JsonData);
@@ -139,7 +140,7 @@ function addEvent(obj) {
   title = obj["Event_title"].value;
   color = obj["Event_color"].value;
 
-  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"'+':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","Client_id"' + ':' + '"' + clientId + '"';
+  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"'+':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","User_id"' + ':' + '"' + userId + '"';
   
   try {
     var xhttp = new XMLHttpRequest();
@@ -174,7 +175,7 @@ function edit(arg) {
   id = arg.event.id;
   title = arg.event.title;
   color = arg.event.color;
-  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"' + ':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","Client_id"' + ':' + '"' + clientId + '"';
+  var JsonData = '"Event_id"' + ':' + '"' + id + '","Event_start"' + ':' + '"' + start + '","Event_end"' + ':' + '"' + end + '","Event_title"' + ':' + '"' + title + '","Event_color"' + ':' + '"' + color + '","User_id"' + ':' + '"' + userId + '"';
 
   try {
     var xhttp = new XMLHttpRequest();
