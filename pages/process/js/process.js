@@ -1,6 +1,6 @@
 var jsonObj1 = "";
 var arrayCell = new Array("# Interno","Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
-var arrayCell1 = new Array("Fecha de informe", "Actuación", "Inicio término", "Fin término", "Ubicación", "Anexo");
+var arrayCell1 = new Array("Fecha de informe", "Actuación", "Tipo de actuación", "Inicio término", "Fin término", "Ubicación", "Tipo de notificación", "Anexo");
 
 function setGeneralInformation(){
   let obj=new StoragePage();
@@ -163,7 +163,7 @@ function getDataProcess(data, type) {
       let rute = jSon[i].Perf_attached.length == 0 ? '' : 'href="' + jSon[i].Perf_attached + '"';
       jSon[i].Perf_initialDate = jSon[i].Perf_initialDate == '0000-00-00' ? '' : jSon[i].Perf_initialDate; 
       jSon[i].Perf_finalDate = jSon[i].Perf_finalDate == '0000-00-00' ? '' : jSon[i].Perf_finalDate; 
-      objtbody += '<tr><td>' + jSon[i].Perf_date + '</td><td>' + jSon[i].Perf_description + '</td><td>' + jSon[i].Perf_initialDate + '</td><td>' + jSon[i].Perf_finalDate + '</td><td>' + jSon[i].Perf_location + '</td><td><a ' + rute + ' target="_blank" class="btn btn-info" style="margin:0; padding:5px"><i class="icon-attach_file"></i></a></td></tr>';
+      objtbody += '<tr><td>' + jSon[i].Perf_date + '</td><td>' + jSon[i].Perf_description + '</td><td>' + jSon[i].Perf_type + '</td><td>' + jSon[i].Perf_initialDate + '</td><td>' + jSon[i].Perf_finalDate + '</td><td>' + jSon[i].Perf_location + '</td><td>' + jSon[i].Perf_notification + '</td><td><a ' + rute + ' target="_blank" class="btn btn-info" style="margin:0; padding:5px"><i class="icon-attach_file"></i></a></td></tr>';
     }
     objtbody += '</tbody>';
     objThead += '</thead>';

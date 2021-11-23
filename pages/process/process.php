@@ -351,8 +351,16 @@ if (!isset($_SESSION['User'])) {
                 <input type="text" class="form-control read" id="Ptype_name">
               </div>
               <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_phase" class="col-form-label">Etapa Procesal</label>
+                <input type="text" class="form-control read" id="Proc_phase">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
                 <label for="Proc_content" class="col-form-label">Contenido</label>
                 <input type="text" class="form-control read" id="Proc_content">
+              </div>
+              <div class="form-group col-lg-4 col-sm-12">
+                <label for="Proc_history" class="col-form-label">Hitorial de radicados</label>
+                <input type="text" class="form-control read" id="Proc_history">
               </div>
             </div>
           </form>
