@@ -130,8 +130,9 @@ if (!isset($_SESSION['User'])) {
         </div>
         <nav class="navbar navbar-light bg-light card-filter" style="text-align: center;">
           <div style="width: 100%;">
-            <button class="btn btn-warning" data-toggle="collapse" href="#processCollapse" data-parent="#selector" role="button" aria-expanded="true" aria-controls="processCollapse" style="margin-right: 100px;">Seguimiento de expedientes</button>
-            <button class="btn btn-info" data-toggle="collapse" href="#requestCollapse" data-parent="#selector" role="button" aria-expanded="false" aria-controls="requestCollapse">Seguimiento de solicitudes</button>
+            <button class="btn btn-warning mb-2 mb-sm-2 mr-lg-4 mb-md-3 mr-md-2" data-toggle="collapse" href="#processCollapse" data-parent="#selector" role="button" aria-expanded="true" aria-controls="processCollapse">Seguimiento de expedientes</button>
+            <button class="btn btn-info mb-2 mb-sm-2 mr-lg-4 mb-md-3 mr-md-2" data-toggle="collapse" href="#requestCollapse" data-parent="#selector" role="button" aria-expanded="false" aria-controls="requestCollapse">Seguimiento de solicitudes</button>
+            <button class="btn btn-warning mb-2 mb-sm-2 mr-lg-4 mb-md-3 mr-md-2" data-toggle="collapse" href="#reportsCollapse" data-parent="#selector" role="button" aria-expanded="false" aria-controls="reportsCollapse">Reporte de Procesos/Actuaciones</button>
           </div>
         </nav>
     </section>
@@ -146,6 +147,8 @@ if (!isset($_SESSION['User'])) {
               <div class="card-body">
                 <select name="selectFilter" id="selectFilter" class="custom-select" onChange="filter(this.id); return false;">
                   <option value="0">Seleccione</option>
+                  <option value="Proc_internConsec-0"># Interno de 0-9</option>
+                  <option value="Proc_internConsec-1"># Interno de 9-0</option>
                   <option value="Proc_building-0">Edificio de A-Z</option>
                   <option value="Proc_building-1">Edificio de Z-A</option>
                   <option value="Proc_origin-0">Origen de A-Z</option>
@@ -185,7 +188,7 @@ if (!isset($_SESSION['User'])) {
                 <label id="Proc_active"></label>
               </div>
               <div class="col-auto">
-                <a href="#" class="btn btn-success" id="btnExcel" onclick="fnExcelReport();">Descargar en excel <i class="fas fa-plus"></i></a>
+                <a href="#" class="btn btn-success" id="btnExcel" onclick="fnExcelReport('tableProcess', this.id, 0);">Descargar en excel <i class="fas fa-plus"></i></a>
               </div>
             </div>
           </div>
@@ -209,6 +212,44 @@ if (!isset($_SESSION['User'])) {
           </div>
           <div class="container card-filter table-responsive table-process my-custom-scrollbar">
             <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableRequest" width="100%" cellspacing="0">
+            </table>
+          </div>
+        </section>
+      </div>
+      <div id="reportsCollapse" class="collapse" data-parent="#selector">
+        <section class="site-section-process card-filter">
+          <div class="container">
+              <form id="formSearchField" class="col-12">
+                <div class="row justify-content-md-center">
+                  <div class="form-group col-10">
+                    <label for="reportSelected" class="col-lg-2 col-md-2 col-sm-2 col-3">Reporte</label>
+                    <select name="reportSelected" id="reportSelected" class="custom-select col-lg-9 col-md-9 col-sm-9 col-8" onChange="changeReport(this.id); return false;">
+                      <option value="">Seleccione</option>
+                      <option value="0">Detalle de los procesos con la última actuación</option>
+                      <!-- <option value="1">Todas las actuaciones en un rango de fecha</option> -->
+                    </select>
+                  </div>
+                  <div id="divDateIni" class="form-group row col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 d-none">
+                    <label for="DateIni" class="col-4">Fecha Inicial</label>
+                    <input type="date" class="form-control col-7" id="DateIni">
+                  </div>
+                  <div id="divDateFin" class="form-group row col-10 col-sm-10 col-md-5 col-lg-5 col-xl-5 d-none">
+                    <label for="DateFin" class="col-4">Fecha Final</label>
+                    <input type="date" class="form-control col-7" id="DateFin">
+                  </div>
+                  <div class="col-lg-1 col-md-2 col-sm-auto col-2">
+                    <button id="searchReport" type="submit" class="btn btn-primary mb-2" onclick="return false;" disabled><i class="icon-search"></i></button>
+                  </div>
+                </div>
+              </form>       
+            <div id="divExcel" class="row justify-content-end d-none">
+              <div class="col-auto">
+                <a href="#" class="btn btn-success" id="btnExcelReport">Descargar en excel <i class="fas fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="container card-filter table-responsive table-process my-custom-scrollbar">
+            <table class="table table-hover table-shadow" data-order='[[ 1, "desc" ]]' data-page-length='25' id="tableReport" width="100%" cellspacing="0">
             </table>
           </div>
         </section>

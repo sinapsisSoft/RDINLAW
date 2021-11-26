@@ -1,6 +1,7 @@
 var jsonObj1 = "";
 var arrayCell = new Array("# Interno","Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
 var arrayCell1 = new Array("Fecha de informe", "Actuación", "Tipo de actuación", "Inicio término", "Fin término", "Ubicación", "Tipo de notificación", "Anexo");
+var arrayCel2 = new Array("# Interno","Edificio", "Origen", "Despacho", "Autoriza", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Departamento", "Ciudad", "Jurisdicción", "Competencia", "Tipo de proceso", "Etapa Procesal", "Contenido", "Historial de radicados", "Estado");
 
 function setGeneralInformation(){
   let obj=new StoragePage();
@@ -57,19 +58,23 @@ function getDataProcess(data, type) {
             jsonObj1 = jsonObj;           
             createtableProcess('tableProcess', arrayCell, jsonObj1);
           }
-          if(type == 1){    
+          else if(type == 1){    
             createtablePerfomance('tablePerformance', arrayCell1, jsonObj);            
             viewModal('perfomance',0);            
           }
-          if(type == 2){
+          else if(type == 2){
             setDataForm(jsonObj);
             disableForm('processDetailForm');
             viewModal('detailProcess',0);
           }
-          if(type == 3){
+          else if(type == 3){
             for (let key in jsonObj[0]) {
               document.getElementById(key).innerHTML = jsonObj[0][key];
             }
+          }
+          else if(type == 4){
+            jsonObj1 = jsonObj;           
+            createtableProcessReport('tableReport', arrayCel2, jsonObj1);
           }
         }
       }
@@ -79,14 +84,17 @@ function getDataProcess(data, type) {
       let user = JSON.parse(obj.getStorageLogin());
       JsonData = '{"GET":"GET_PROCESS_USER","User_id":"' + user[0]["User_id"] + '","Name":"' + data + '"}';
     }
-    if(type == 1){
+    else if(type == 1){
       JsonData = '{"GET":"GET_PERFORMANCE_PROCESS","Proc_id":"' + data + '"}';
     }   
-    if(type == 2){
+    else if(type == 2){
       JsonData = '{"GET":"GET_PROCESS_DETAIL","Proc_id":"' + data + '"}';
     }
-    if(type == 3){
+    else if(type == 3){
       JsonData = '{"GET":"GET_PROC_CLIENT_COUNT","User_id":"' + data + '"}';
+    }
+    else if(type == 4){
+      JsonData = '{"GET":"GET_PROCESS_ALL_DETAIL","User_id":"' + data + '"}';
     }
     xhttp.send(JsonData);
   } catch (error) {
@@ -171,6 +179,58 @@ function getDataProcess(data, type) {
     objTable.innerHTML = table;
   }
 
+  //**Method create process table for report **/
+  function createtableProcessReport(id, arrayCell, jSon) {
+    var objTable = document.getElementById(id);
+    objTable.innerHTML = "";
+    let objThead = '<thead>';
+    let objtbody = '<tbody>';
+    let table = "";
+    for (let j = 0; j < arrayCell.length; j++) {
+      if (j == 0) {
+        objThead += '<tr class="thead-dark title">';
+      }
+      objThead += '<th class="text-nowrap">' + arrayCell[j] + '</th>';
+      if (j == arrayCell.length) {
+        objThead += '</tr>';
+      }
+    }
+    for (let k = 0; k < arrayCell.length; k++) {
+      if (k == 0) {
+        objThead += '<tr class="blue">';
+      }
+      objThead += '<th><input type="text" class="form-control bg-light border-0 small noExport" id="myInput2' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k  + ",'myInput2'" + ')" placeholder="Search.." title="Search"></th>';
+    }
+    for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
+      let status = jSon[i].Proc_status === null ? "N/A": jSon[i].Proc_status;
+      let phase = jSon[i].Proc_phase === null ? "": jSon[i].Proc_phase;
+      let history = jSon[i].Proc_history === null ? "": jSon[i].Proc_history;
+      objtbody += "<tr><td>" + jSon[i].Proc_internConsec + "</td>" +
+                      "<td>" + jSon[i].Proc_building + "</td>"+
+                      "<td>" + jSon[i].Proc_origin + "</td>"+
+                      "<td>" + jSon[i].Proc_office + "</td>"+
+                      "<td>" + jSon[i].Proc_officeEmail + "</td>"+
+                      "<td>'" + jSon[i].Proc_filing + "</td>"+
+                      "<td>" + jSon[i].Proc_consecutive + "</td>"+
+                      "<td>" + jSon[i].Proc_attorney + "</td>"+
+                      "<td>" + jSon[i].Proc_plaintiff + "</td>"+
+                      "<td>" + jSon[i].Proc_defendant + "</td>"+
+                      "<td>" + jSon[i].Proc_department + "</td>"+
+                      "<td>" + jSon[i].Proc_city + "</td>"+
+                      "<td>" + jSon[i].Proc_juridistic + "</td>"+
+                      "<td>" + jSon[i].Proc_area + "</td>"+
+                      "<td>" + jSon[i].Ptype_name + "</td>"+
+                      "<td>" + phase + "</td>"+
+                      "<td>" + jSon[i].Proc_content + "</td>"+                      
+                      "<td>" + history + "</td>"+
+                      "<td>" + status + "</td></tr>";
+    }
+    objtbody += '</tbody>';
+    objThead += '</thead>';
+    table = objThead + objtbody;
+    objTable.innerHTML = table;
+  }
+
   function filter(id){    
     let selected = document.getElementById(id).value;
     let order = selected.split("-");
@@ -221,12 +281,21 @@ function closeSession() {
   window.location.assign("../login/login.php");
 }
 
-function fnExcelReport() {
-  let table = document.getElementById('tableProcess').innerHTML;
+function fnExcelReport(idTable, idButton, type) {
+  if(type == 0){
+    reportName = "Reporte Expedientes";
+  }
+  else if(type == 1){
+    reportName = "Reporte Procesos";
+  }
+  else if(type == 2){
+    reportName = "Reporte Actuaciones";
+  }
+  let table = document.getElementById(idTable).innerHTML;
   var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
   tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
 
-  tab_text = tab_text + '<x:Name>Reporte Expedientes</x:Name>';
+  tab_text = tab_text + '<x:Name>'+reportName+'</x:Name>';
 
   tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
   tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
@@ -246,11 +315,46 @@ function fnExcelReport() {
           var blob = new Blob([tab_text], {
               type: "text/plain;charset=utf-8;"
           });
-          navigator.msSaveBlob(blob, 'reporteExpedientes.xls');
+          navigator.msSaveBlob(blob, reportName+'.xls');
       }
   } else {
-      $('#btnExcel').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
-      $('#btnExcel').attr('download', 'reporteExpedientes.xls');
+      $('#'+idButton).attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+      $('#'+idButton).attr('download', reportName+'.xls');
   }
+}
 
+function changeReport(select){
+  let objSelect = document.getElementById(select);
+  optionSelectd = objSelect.options[objSelect.selectedIndex].value;
+  btnExcel = document.getElementById("btnExcelReport");
+  btnSearch = document.getElementById("searchReport");
+  document.getElementById("searchReport").removeAttribute("disabled");  
+  if(optionSelectd == 0){   
+    btnExcel.addEventListener("click", function(){
+      fnExcelReport('tableReport', "btnExcelReport", 0);
+    }, false);
+    btnSearch.addEventListener("click", function(){
+      loadReport(0);
+    }, false);    
+  }
+  else if(optionSelectd == 1){
+    // Añadir que sea visible las fechas. 
+    btnExcel.addEventListener("click", function(){
+      fnExcelReport('tableReport', "btnExcelReport", 1);
+    }, false);
+    btnSearch.addEventListener("click", function(){
+      loadReport(1);
+    }, false);
+  }
+}
+
+function loadReport(type){
+  if(type == 0){
+    userId = document.getElementById("User_id").value;
+    getDataProcess(userId, 4);
+  }
+  else if(type == 1){
+    // Tomar las fechas y enviarlas a buscar las actuaciones
+  }
+  document.getElementById("divExcel").classList.remove("d-none");
 }
