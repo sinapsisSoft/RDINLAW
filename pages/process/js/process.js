@@ -2,6 +2,7 @@ var jsonObj1 = "";
 var arrayCell = new Array("# Interno","Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Estado", "Detalle", "Actuaciones");
 var arrayCell1 = new Array("Fecha de informe", "Actuación", "Tipo de actuación", "Inicio término", "Fin término", "Ubicación", "Tipo de notificación", "Anexo");
 var arrayCel2 = new Array("# Interno","Edificio", "Origen", "Despacho", "Autoriza", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Departamento", "Ciudad", "Jurisdicción", "Competencia", "Tipo de proceso", "Etapa Procesal", "Contenido", "Historial de radicados", "Estado");
+var arrayCel3 = new Array("# Interno","Ciudad", "Origen", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Historial Radicados","Fecha Informe", "Actuación", "Tipo Actuación", "Inicio Término", "Fin Término", "Ubicación", "Tipo Notificación");
 
 function setGeneralInformation(){
   let obj=new StoragePage();
@@ -72,9 +73,11 @@ function getDataProcess(data, type) {
               document.getElementById(key).innerHTML = jsonObj[0][key];
             }
           }
-          else if(type == 4){
-            jsonObj1 = jsonObj;           
-            createtableProcessReport('tableReport', arrayCel2, jsonObj1);
+          else if(type == 4){           
+            createtableProcessReport('tableReport', arrayCel2, jsonObj);
+          }
+          else if(type == 5){         
+            createtablePerformanceReport('tableReport', arrayCel3, jsonObj);
           }
         }
       }
@@ -95,6 +98,9 @@ function getDataProcess(data, type) {
     }
     else if(type == 4){
       JsonData = '{"GET":"GET_PROCESS_ALL_DETAIL","User_id":"' + data + '"}';
+    }
+    else if(type == 5){
+      JsonData = '{"GET":"GET_PERFORMANCE_ALL_REPORT",' + data + '}';
     }
     xhttp.send(JsonData);
   } catch (error) {
@@ -231,6 +237,57 @@ function getDataProcess(data, type) {
     objTable.innerHTML = table;
   }
 
+  //**Method create process table for report **/
+  function createtablePerformanceReport(id, arrayCell, jSon) {
+    var objTable = document.getElementById(id);
+    objTable.innerHTML = "";
+    let objThead = '<thead>';
+    let objtbody = '<tbody>';
+    let table = "";
+    for (let j = 0; j < arrayCell.length; j++) {
+      if (j == 0) {
+        objThead += '<tr class="thead-dark title">';
+      }
+      objThead += '<th class="text-nowrap">' + arrayCell[j] + '</th>';
+      if (j == arrayCell.length) {
+        objThead += '</tr>';
+      }
+    }
+    for (let k = 0; k < arrayCell.length; k++) {
+      if (k == 0) {
+        objThead += '<tr class="blue">';
+      }
+      objThead += '<th><input type="text" class="form-control bg-light border-0 small noExport" id="myInput2' + k + '" onkeyup="searchTable(' + "'" + id + "'," + k  + ",'myInput2'" + ')" placeholder="Search.." title="Search"></th>';
+    }
+    for (let i = 0, j = jSon.length; i < jSon.length; i++, j--) {
+      jSon[i].Perf_initialDate = jSon[i].Perf_initialDate == '0000-00-00' ? '' : jSon[i].Perf_initialDate; 
+      jSon[i].Perf_finalDate = jSon[i].Perf_finalDate == '0000-00-00' ? '' : jSon[i].Perf_finalDate; 
+      jSon[i].Proc_history = jSon[i].Proc_history == null ? '' : jSon[i].Proc_history; 
+      jSon[i].Perf_notification = jSon[i].Perf_notification == null ? '' : jSon[i].Perf_notification; 
+      objtbody += "<tr><td>" + jSon[i].Proc_internConsec + "</td>" +
+                      "<td>" + jSon[i].Proc_city + "</td>"+
+                      "<td>" + jSon[i].Proc_origin + "</td>"+
+                      "<td>" + jSon[i].Proc_office + "</td>"+
+                      "<td>'" + jSon[i].Proc_filing + "</td>"+
+                      "<td>" + jSon[i].Proc_consecutive + "</td>"+
+                      "<td>" + jSon[i].Proc_attorney + "</td>"+
+                      "<td>" + jSon[i].Proc_plaintiff + "</td>"+
+                      "<td>" + jSon[i].Proc_defendant + "</td>"+
+                      "<td>" + jSon[i].Proc_history + "</td>"+
+                      "<td>" + jSon[i].Perf_date + "</td>"+
+                      "<td>" + jSon[i].Perf_description + "</td>"+
+                      "<td>" + jSon[i].Perf_type + "</td>"+
+                      "<td>" + jSon[i].Perf_initialDate + "</td>"+
+                      "<td>" + jSon[i].Perf_finalDate + "</td>"+
+                      "<td>" + jSon[i].Perf_location + "</td>"+  
+                      "<td>" + jSon[i].Perf_notification + "</td></tr>";
+    }
+    objtbody += '</tbody>';
+    objThead += '</thead>';
+    table = objThead + objtbody;
+    objTable.innerHTML = table;
+  }
+
   function filter(id){    
     let selected = document.getElementById(id).value;
     let order = selected.split("-");
@@ -327,8 +384,8 @@ function changeReport(select){
   let objSelect = document.getElementById(select);
   optionSelectd = objSelect.options[objSelect.selectedIndex].value;
   btnExcel = document.getElementById("btnExcelReport");
-  btnSearch = document.getElementById("searchReport");
-  document.getElementById("searchReport").removeAttribute("disabled");  
+  btnSearch = document.getElementById("searchReport");  
+  finDate = document.getElementById("DateFin");
   if(optionSelectd == 0){   
     btnExcel.addEventListener("click", function(){
       fnExcelReport('tableReport', "btnExcelReport", 0);
@@ -336,25 +393,35 @@ function changeReport(select){
     btnSearch.addEventListener("click", function(){
       loadReport(0);
     }, false);    
+    document.getElementById("divDateIni").classList.add("d-none");
+    document.getElementById("divDateFin").classList.add("d-none");
+    document.getElementById("searchReport").removeAttribute("disabled");  
   }
   else if(optionSelectd == 1){
-    // Añadir que sea visible las fechas. 
+    document.getElementById("divDateIni").classList.remove("d-none");
+    document.getElementById("divDateFin").classList.remove("d-none");
     btnExcel.addEventListener("click", function(){
       fnExcelReport('tableReport', "btnExcelReport", 1);
     }, false);
     btnSearch.addEventListener("click", function(){
       loadReport(1);
     }, false);
+    finDate.addEventListener("change", function(){
+      document.getElementById("searchReport").removeAttribute("disabled");  
+    }, false);    
   }
 }
 
 function loadReport(type){
-  if(type == 0){
-    userId = document.getElementById("User_id").value;
+  userId = document.getElementById("User_id").value;
+  if(type == 0){    
     getDataProcess(userId, 4);
   }
   else if(type == 1){
-    // Tomar las fechas y enviarlas a buscar las actuaciones
+    dateIni = document.getElementById("DateIni").value;
+    dateFin = document.getElementById("DateFin").value;
+    json = '"User_id":"' + userId + '","DateIni":"' + dateIni + '","DateFin":"' + dateFin + '"';
+    getDataProcess(json, 5);
   }
   document.getElementById("divExcel").classList.remove("d-none");
 }

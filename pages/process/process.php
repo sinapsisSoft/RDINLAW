@@ -219,14 +219,14 @@ if (!isset($_SESSION['User'])) {
       <div id="reportsCollapse" class="collapse" data-parent="#selector">
         <section class="site-section-process card-filter">
           <div class="container">
-              <form id="formSearchField" class="col-12">
+              <form id="formSearchReport" class="col-12">
                 <div class="row justify-content-md-center">
                   <div class="form-group col-10">
                     <label for="reportSelected" class="col-lg-2 col-md-2 col-sm-2 col-3">Reporte</label>
                     <select name="reportSelected" id="reportSelected" class="custom-select col-lg-9 col-md-9 col-sm-9 col-8" onChange="changeReport(this.id); return false;">
                       <option value="">Seleccione</option>
                       <option value="0">Detalle de los procesos con la última actuación</option>
-                      <!-- <option value="1">Todas las actuaciones en un rango de fecha</option> -->
+                      <option value="1">Todas las actuaciones en un rango de fecha</option>
                     </select>
                   </div>
                   <div id="divDateIni" class="form-group row col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 d-none">
