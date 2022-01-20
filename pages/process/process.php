@@ -48,7 +48,7 @@ if (!isset($_SESSION['User'])) {
   <!-- Guía de uso -->
   <div class="actionLeft">
     <div class="cont-float" data-toggle="tooltip" data-placement="top" title="Revise la guía rápida de uso de la plataforma">
-      <a href="https://ior.ad/7nXD" target="_blank" title="Guía de apoyo"><i class="flaticon-signo-de-exclamacion-dentro-de-un-circulo"></i></a>
+      <a href="https://ior.ad/7Xkd" target="_blank" title="Guía de apoyo"><i class="flaticon-signo-de-exclamacion-dentro-de-un-circulo"></i></a>
     </div>
   </div>
   <!-- Fin guía de uso -->
