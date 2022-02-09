@@ -400,7 +400,7 @@ if (!isset($_SESSION['User'])) {
                 <input type="text" class="form-control read" id="Proc_content">
               </div>
               <div class="form-group col-lg-4 col-sm-12">
-                <label for="Proc_history" class="col-form-label">Hitorial de radicados</label>
+                <label for="Proc_history" class="col-form-label">Historial de radicados</label>
                 <input type="text" class="form-control read" id="Proc_history">
               </div>
             </div>
