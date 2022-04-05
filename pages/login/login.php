@@ -31,6 +31,7 @@
 				</div>
 
 				<form class="login100-form validate-form" method="POST" id="form_login" onsubmit="sendData(this.id);return false">
+          <input type="hidden" name="Platform_id" id="Platform_id" value="1">
 					<span class="login100-form-title">
 						Bienvenido <?php echo "Usuario"?>
 					</span>
