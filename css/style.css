@@ -2161,6 +2161,7 @@ figure figcaption {
 
 .site-menu li a i {
   font-size: 23px;
+  cursor: pointer;
 }
 
 .table-shadow {
@@ -2270,3 +2271,61 @@ table thead .blue th {
   color: rgba(153, 62, 170, 0.78);
 }
 
+.dropdown-menu{
+  padding-top: 0 !important;
+}
+
+.dropdown-menu h6{
+  color: #442949;
+  background: #eacaa7;
+}
+
+.menu-circle {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-counter {
+  position: absolute;
+  transform: scale(.9);
+  transform-origin: top right;
+  margin-top: -0.25rem;
+}
+
+.site-menu li .dropdown-item {
+  transition: 0.5s all ease;
+}
+
+.site-menu li .dropdown-item:hover{
+  background: #442949;
+  color: #ffffff;
+}
+
+.site-mobile-menu li .dropdown-item:hover {
+  background: #442949;
+  color: #ffffff;
+}
+
+.site-menu li .dropdown-menu{
+  max-width: 50%;
+}
+
+.site-mobile-menu .site-nav-wrap .dropdown-menu{
+  max-width: 100%;
+}
+
+.site-mobile-menu .site-nav-wrap .dropdown-item{
+  color: #000000;
+}
+
+.site-mobile-menu .site-nav-wrap li a .badge-counter {
+  left: 1.7rem;
+}
+
+.site-menu li a .badge-counter {
+  left: 30rem;
+}

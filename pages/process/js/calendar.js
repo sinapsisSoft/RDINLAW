@@ -23,7 +23,7 @@ function getDataClient(dataSetEvent, typeSend) {
         if (json.length != 0) {
           if (typeSend == 0) {
             clientId = json[0]["Client_id"];
-          }   
+          }             
         } else {
           enableScroll();
         }
@@ -32,7 +32,6 @@ function getDataClient(dataSetEvent, typeSend) {
     if (typeSend == 0) {
       JsonData = '{"GET":"GET_CLIENT_ID","User_email":"' + dataSetEvent + '"}';
     }  
-
     xhttp.send(JsonData);
   } catch (error) {
     console.error(error);
@@ -56,6 +55,10 @@ function getDataEvent(dataSetEvent, typeSend) {
             setCalendar(json);
             enableScroll();   
           }   
+          else if (typeSend == 1) {
+            createMenuItem(json);
+          }
+          
         } else {
           setCalendar(json);
           enableScroll();
@@ -65,6 +68,9 @@ function getDataEvent(dataSetEvent, typeSend) {
     if (typeSend == 0) {
       JsonData = '{"GET":"GET_EVENT_CLIENT","User_id":"' + dataSetEvent + '"}';
     }  
+    else if (typeSend == 1) {
+      JsonData = '{"GET":"GET_EVENT_LIST_USER","User_id":"' + dataSetEvent + '"}';
+    }
 
     xhttp.send(JsonData);
   } catch (error) {
@@ -253,3 +259,29 @@ $("#calendarModal").on('hidden.bs.modal', function () {
   cleanForm("calendarInfo");
   cleanForm("addForm");
 });
+
+function createMenuItem(json){
+  let count = document.getElementsByClassName("badge-counter");
+  for (item of count){
+    item.textContent = json.length
+  }
+  let menuItems = document.getElementsByClassName("dropdown-menu");  
+  let content = "";
+  for (item of json) {
+    content += `<a class="dropdown-item d-flex align-items-center">
+                  <div class="mr-3">
+                    <div class="menu-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">${item.Event_start}</div>
+                    <span class="font-weight-bold text-wrap">${item.Event_title}</span>
+                  </div>
+                </a>`;
+  }
+  for (item of menuItems) {
+    item.innerHTML += content;
+  }
+  
+}

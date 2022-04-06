@@ -9,8 +9,9 @@ function setGeneralInformation(){
   let json=JSON.parse(obj.getStorageLogin());
   getDataUser(json,0);
   setTimeout(function(){ 
-    getDataRequest("",0);             
-  }, 2000);  
+    getDataRequest("",0);  
+    getDataEvent(json[0]["User_id"], 1);           
+  }, 2000);    
 }
 
 function getDataUser(data, type) {

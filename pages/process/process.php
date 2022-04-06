@@ -34,6 +34,7 @@ if (!isset($_SESSION['User'])) {
   <link rel="stylesheet" href="css/process.css">
   <link rel="stylesheet" href="css/request.css">
   <link rel='stylesheet' href='../../vendor/fullcalendar/css/main.css' />
+  <link rel="stylesheet" href="../../vendor/fontawesome-free/css/all.min.css" type="text/css">
 
 </head>
 
@@ -74,10 +75,21 @@ if (!isset($_SESSION['User'])) {
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li data-toggle="tooltip" data-placement="top" title="Nueva Solicitud"><a href="" data-placement="top" title="Crear nueva solicitud" data-toggle="modal" data-target="#requests">
-                    <i class="flaticon-solicitud"></i> Nueva solicitud
-                  </a></li>
-                <li><a href="../../php/class/closeSession.php" id="loginbtn" data-toggle="tooltip" data-placement="top" title="Salir" onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i> Cerrar Sesión</a></li>
+                <li data-toggle="tooltip" data-placement="top" title="Notificaciones">
+                  <a id="alerts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-placement="top" title="Notificaciones" style="cursor: pointer;">
+                    <i class="fa fa-bell"></i>
+                    <span id="notificationCount" class="badge badge-danger badge-counter"></span>Alertas
+                  </a>
+                  <div id="menu-notifications" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <h6 class="dropdown-header">Próximos eventos</h6>                    
+                  </div>
+                </li>
+                <li data-toggle="tooltip" data-placement="top" title="Nueva Solicitud">
+                  <a href="" data-placement="top" title="Crear nueva solicitud" data-toggle="modal" data-target="#requests">
+                  <i class="flaticon-solicitud"></i> Nueva solicitud</a></li>
+                <li data-toggle="tooltip" data-placement="top" title="Salir">
+                  <a href="../../php/class/closeSession.php" id="loginbtn"onclick="closeSession()"><i class="flaticon-usuario-de-perfil"></i> Cerrar Sesión</a>
+                </li>
               </ul>
             </nav>
           </div>
