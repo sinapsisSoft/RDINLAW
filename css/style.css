@@ -17,7 +17,7 @@ body {
   color: gray;
   font-weight: 400;
   font-size: 1rem;
-  font-family: "Argesta Display Regular" !important;
+  /* font-family: "Argesta Display Regular" !important; */
  }
 
 ::-moz-selection {
@@ -82,7 +82,7 @@ body:after {
 .btn {
   font-size: 16px;
   border-radius: 30px;
-  padding: 10px 30px; }
+  padding: 5px 30px; }
   .btn:hover, .btn:active, .btn:focus {
     outline: none;
     -webkit-box-shadow: none !important;
@@ -106,9 +106,9 @@ body:after {
   background: #000; }
 
 .form-control {
-  height: 43px;
-  border-radius: 30px;
-  font-family: "Argesta Display Regular"; }
+  height: 30px;
+  /* font-family: "Argesta Display Regular"; */
+  }
   .form-control:active, .form-control:focus {
     border-color: #e29116; }
   .form-control:hover, .form-control:active, .form-control:focus {
