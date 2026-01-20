@@ -1,0 +1,29 @@
+{
+    "create": [
+        {
+            "controller": "login",
+            "method":"add",
+            "httpMethod": "POST",
+            "uri": "login/add",
+            "uriLocation": "/dashboard"
+        }
+    ],
+    "sendLogin": [
+        {
+            "controller": "login",
+            "method":"login",
+            "httpMethod": "POST",
+            "uri": "login/send",
+            "uriLocation": "/dashboard"
+        }
+    ],
+    "sendForgotPassword": [
+        {
+            "controller": "login",
+            "method":"forgotPassword",
+            "httpMethod": "POST",
+            "uri": "forgotPassword/send",
+            "uriLocation": "/login"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+.table-process{
+  font-size: 13px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.table-performance {
+  font-size: 13px;
+}
+
+.card-filter {
+  margin-top: 20px;
+}
+
+/* Left float */
+.actionLeft {
+  position: fixed;
+  top: 230px;
+  left: 0px;
+  height: auto;
+  width: 100px;
+  z-index: 100;
+}
+
+.cont-float {
+  vertical-align: middle;
+  background-color: #ffffff;
+  border-radius: 0px 20px 20px 0px;
+  left: 0px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 5px;
+  box-shadow: 10px 10px 17px -3px rgba(0, 0, 0, 0.75);
+  transition: 0.8s all;
+}
+
+.actionLeft .cont-float a{
+  color: #432849;
+}
+
+.actionLeft .cont-float:hover {
+  background-color: rgba(67, 40, 73, 0.8);
+}
+
+.actionLeft .cont-float:hover > a{
+  color: #ebcaa8;
+}
