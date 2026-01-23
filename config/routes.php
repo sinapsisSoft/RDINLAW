@@ -23,9 +23,8 @@ class Router {
             $action = $route['action'];
             
             // Verificar si el controlador y el método existen
-            if (class_exists($controllerName) {
+            if (class_exists($controllerName)) {
                 $controller = new $controllerName();
-                
                 if (method_exists($controller, $action)) {
                     // Llamar al método del controlador
                     call_user_func([$controller, $action]);
