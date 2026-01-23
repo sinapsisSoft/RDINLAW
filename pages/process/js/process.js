@@ -17,6 +17,14 @@ var arrayCel2 = new Array("# Interno", "Edificio", "Origen", "Despacho", "Autori
 var arrayCel3 = new Array("# Interno", "Ciudad", "Despacho", "Radicado", "Consecutivo", "Apoderado", "Demandante", "Demandado", "Historial Radicados", "Fecha Informe", "Actuación", "Tipo Actuación", "Inicio Término", "Fin Término", "Ubicación", "Tipo Notificación");
 
 
+ //Header de la tabla de detalle de los procesos
+var headersProc = ["# Interno","Edificio","Origen","Despacho","Autoriza","Radicado","Consecutivo","Apoderado","Demandante","Demandado","Departamento","Ciudad","Jurisdicción","Competencia","Tipo de proceso","Etapa Procesal","Contenido","Historial de radicados","Estado"
+];
+
+ //Header de la tabla con filtro de fecha
+const headersPerf = ["Id","Fecha Informe","Tipo","Ubicación","Descripción","Inicio Término","Fin Término","# Interno","Consecutivo","Radicado","Demandante","Demandado","Apoderado","Ciudad","Despacho"
+];
+
 const storage = new AppStorage();
 const alertManager = new AlertManager('alert-container', 6000);
 const modal = new bootstrap.Modal(document.getElementById('modalProcess'));
@@ -54,11 +62,11 @@ function getDataProcessToDate() {
   json = '"User_id":"' + userId + '","DateIni":"' + dateIni + '","DateFin":"' + dateFin + '"';
 const dataSetReport = {
       GET: 'GET_PERFORMANCE_ALL_REPORT',
-      userId:document.getElementById("User_id").value,
-      dateIni: document.getElementById('DateIni').value,
-      dateFin: document.getElementById('DateFin').value,
+      User_id: userId,
+      DateIni: dateIni,
+      DateFin: dateFin
     };
-//console.log(reportData);
+    console.log(dataSetReport);
   fetch(ajaxProcess, {
     method: 'POST',
     headers: {
@@ -68,6 +76,10 @@ const dataSetReport = {
   }).then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      createPerfTable(data);
+      fadeIn("table-container", 500, () => {
+        LoadingScreen.hide();
+      });
     }).catch((error) => {
       console.error('Error:', error);
       alertManager.showError("Error en la conexión", 4000, dismissible = true);
@@ -88,7 +100,7 @@ function getDataProcess() {
     body: JSON.stringify(dataSetUser)
   }).then(response => response.json())
     .then(data => {
-      //console.log('Success:', data);
+      console.log('Success:', data);
       createTable(data);
       fadeIn("table-container", 500, () => {
         LoadingScreen.hide();
@@ -103,7 +115,19 @@ function getDataProcess() {
 
 }
 
+function droptable() {
+  if ($.fn.dataTable.isDataTable('#dataTableApp')) {
+    $('#dataTableApp').DataTable().clear().destroy();
+  }
+  $('#dataTableApp thead tr').empty();
+  $('#dataTableApp tfoot tr').empty();
+}
+ //Header de la tabla de detalle de los procesos
 function createTable(dataSet) {
+
+   droptable()
+  
+   setTableHeaders(headersProc);
 
   const table = $('#dataTableApp').DataTable({
     data: dataSet,
@@ -325,34 +349,51 @@ function showHiddenModal(status = true, type = 1) {
 }
 
 function changeReport(select) {
-  let objSelect = document.getElementById(select);
-  optionSelectd = objSelect.options[objSelect.selectedIndex].value;
-  btnExcel = document.getElementById("btnExcelReport");
-  btnSearch = document.getElementById("searchReport");
-  finDate = document.getElementById("DateFin");
-  if (optionSelectd == 0) {
-    btnExcel.addEventListener("click", function () {
+  const objSelect = document.getElementById(select);
+  const optionSelectd = objSelect.options[objSelect.selectedIndex].value;
+  const btnExcel = document.getElementById("btnExcelReport");
+  const btnSearch = document.getElementById("searchReport");
+  const finDate = document.getElementById("DateFin");
+  const tableReport = document.getElementById("tableReport");
+  
+  if (tableReport) {
+    tableReport.classList.add("d-none");
+  }
+  if (optionSelectd === "" || optionSelectd === null) {
+    document.getElementById("divDateIni").classList.add("d-none");
+    document.getElementById("divDateFin").classList.add("d-none");
+    document.getElementById("searchReport").setAttribute("disabled", "disabled");
+    return;
+  }
+
+  const btnExcelNew = btnExcel.cloneNode(true);
+  const btnSearchNew = btnSearch.cloneNode(true);
+  btnExcel.parentNode.replaceChild(btnExcelNew, btnExcel);
+  btnSearch.parentNode.replaceChild(btnSearchNew, btnSearch);
+  
+  if (optionSelectd === "0") {
+    btnExcelNew.addEventListener("click", () => {
       fnExcelReport('tableReport', "btnExcelReport", 0);
-    }, false);
-    btnSearch.addEventListener("click", function () {
+    });
+    btnSearchNew.addEventListener("click", () => {
       loadReport(0);
-    }, false);
+    });
     document.getElementById("divDateIni").classList.add("d-none");
     document.getElementById("divDateFin").classList.add("d-none");
     document.getElementById("searchReport").removeAttribute("disabled");
   }
-  else if (optionSelectd == 1) {
+  else if (optionSelectd === "1") {
     document.getElementById("divDateIni").classList.remove("d-none");
     document.getElementById("divDateFin").classList.remove("d-none");
-    btnExcel.addEventListener("click", function () {
+    btnExcelNew.addEventListener("click", () => {
       fnExcelReport('tableReport', "btnExcelReport", 1);
-    }, false);
-    btnSearch.addEventListener("click", function () {
+    });
+    btnSearchNew.addEventListener("click", () => {
       loadReport(1);
-    }, false);
-    finDate.addEventListener("change", function () {
+    });
+    finDate.addEventListener("change", () => {
       document.getElementById("searchReport").removeAttribute("disabled");
-    }, false);
+    });
   }
 }
 
@@ -360,14 +401,134 @@ function loadReport(type) {
   if (type == 0) {
     //getDataReports(userId, 4);
     getDataProcess();
-
   }
   else if (type == 1) {
-
     getDataProcessToDate();
-   
   }
+}
+
+//tabla con filtro de fecha
+function createPerfTable(dataSet) {
+
+  droptable()
+
+  setTableHeaders(headersPerf);
+
+  const table = $('#dataTableApp').DataTable({
+    data: dataSet,
+    columns: [
+      { data: 'Perf_id' },
+      { data: 'Perf_date' },
+      { data: 'Perf_type' },
+      { data: 'Perf_location' },
+      { data: 'Perf_description' },
+      { data: 'Perf_initialDate' },
+      { data: 'Perf_finalDate' },
+      { data: 'Proc_internConsec' },
+      { data: 'Proc_consecutive' },
+      { data: 'Proc_filing' },
+      { data: 'Proc_plaintiff' },
+      { data: 'Proc_defendant' },
+      { data: 'Proc_attorney' },
+      { data: 'Proc_city' },
+      { data: 'Proc_office' }
+    ],
+    order: [[1, 'desc']],
+    dom: '<"d-flex justify-content-between align-items-center mb-3"lfB>rtip',
+    lengthMenu: [5, 10, 25, 50, 100],
+    pageLength: 5,
+    buttons: {
+      dom: {
+        button: {
+          className: 'btn btn-sm'
+        },
+        buttonLiner: {
+          tag: null
+        }
+      },
+      buttons: [
+        {
+          extend: 'colvis',
+          text: '<i class="fas fa-eye"></i> Columnas',
+          className: 'btn btn-secondary'
+        },
+        {
+          extend: 'collection',
+          text: '<i class="fas fa-download"></i> Exportar',
+          className: 'btn btn-primary dropdown-toggle',
+          buttons: [
+            {
+              extend: 'excelHtml5',
+              text: '<i class="fas fa-file-excel"></i> Excel',
+            },
+            {
+              extend: 'csvHtml5',
+              text: '<i class="fas fa-file-csv"></i> CSV',
+            },
+            {
+              extend: 'pdfHtml5',
+              text: '<i class="fas fa-file-pdf"></i> PDF',
+            },
+            {
+              extend: 'print',
+              text: '<i class="fas fa-print"></i> Imprimir'
+            }
+          ]
+        }
+      ]
+    },
+    language: {
+      decimal: "",
+      emptyTable: "No hay datos disponibles",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      infoEmpty: "Mostrando 0 a 0 de 0 registros",
+      infoFiltered: "(filtrado de _MAX_ registros totales)",
+      infoPostFix: "",
+      thousands: ", ",
+      lengthMenu: "Mostrar _MENU_ registros",
+      loadingRecords: "Cargando...",
+      processing: "Procesando...",
+      search: "_INPUT_",
+      searchPlaceholder: "Buscar...",
+      zeroRecords: "No se encontraron registros coincidentes",
+      paginate: {
+        first: "Primero",
+        last: "Último",
+        next: "Siguiente",
+        previous: "Anterior"
+      }
+    },
+    initComplete: function () {
+      $('.dataTables_length label').addClass('mb-0');
+      $('.dataTables_filter label').addClass('mb-0');
+    }
+  });
+
+  $('#dataTableApp tbody').on('click', '.btn-detalle', function () {
+    const id = $(this).data('id');
+    showDetail(id);
+  });
+  $('#dataTableApp tbody').on('click', '.btn-actuacion', function () {
+    const id = $(this).data('id');
+    showPerformances(id);
+  });
+
+  $('#dataTableApp tbody').on('click', '.btn-otro', function () {
+    const id = $(this).data('id');
+    otraAccion(id);
+  });
 
 }
 
+function setTableHeaders(headersArray) {
+  const theadRow = $('#dataTableApp thead tr');
+  const tfootRow = $('#dataTableApp tfoot tr');
 
+  theadRow.empty();
+  tfootRow.empty();
+
+  headersArray.forEach(function (title) {
+    theadRow.append('<th>' + title + '</th>');
+    tfootRow.append('<th>' + title + '</th>');
+  });
+}

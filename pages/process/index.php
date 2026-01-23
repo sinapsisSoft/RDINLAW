@@ -80,8 +80,20 @@ if ($var_session === null) {
                     <input type="date" class="form-control col-7" id="DateFin">
                   </div>
                   <div class="col-lg-1 col-md-2 col-sm-auto col-2">
-                    <button id="searchReport" type="submit" class="btn btn-primary mb-2" onclick="return false;" disabled><i class="icon-search"></i></button>
-                  </div>
+                     <button id="searchReport"
+                            type="submit"
+                            class="btn btn-primary mb-2 d-flex align-items-center justify-content-center"
+                            onclick="return false;"
+                            disabled>
+                      <lord-icon
+                        src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-18-autorenew-hover-autorenew.json"
+                        trigger="hover"
+                        stroke="light"
+                        state="hover-pinch"
+                        colors="primary:#ffffff,secondary:#b4b4b4"
+                        style="width:30px;height:30px">
+                      </lord-icon>
+                    </button>
                 </div>
               </form>
               <div id="divExcel" class="row justify-content-end d-none">
@@ -116,61 +128,18 @@ if ($var_session === null) {
                 <strong style="line-height: 2;position: absolute;">Tabla de Procesos</strong>
               </div>
               <div class="card-body">
-                <div class="table-responsive">
-                  <table id="dataTableApp" class="table table-striped table-bordered" style="width:100%" data-order='[[ 1, "asc" ]]'>
-                    <thead class="table-dark">
-                      <tr>
-                        <th># Interno</th>
-                        <th>Edificio</th>
-                        <th>Origen</th>
-                        <th>Despacho</th>
-                        <th>Autoriza</th>
-                        <th>Radicado</th>
-                        <th>Consecutivo</th>
-                        <th>Apoderado</th>
-                        <th>Demandante</th>
-                        <th>Demandado</th>
-                        <th>Departamento</th>
-                        <th>Ciudad</th>
-                        <th>Jurisdicción</th>
-                        <th>Competencia</th>
-                        <th>Tipo de proceso </th>
-                        <th>Etapa Procesal</th>
-                        <th>Contenido</th>
-                        <th>Historial de radicados</th>
-                        <th>Estado</th>
-                      </tr>
-                    </thead>
-
-                    <tbody id="table_body">
-
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                         <th># Interno</th>
-                        <th>Edificio</th>
-                        <th>Origen</th>
-                        <th>Despacho</th>
-                        <th>Autoriza</th>
-                        <th>Radicado</th>
-                        <th>Consecutivo</th>
-                        <th>Apoderado</th>
-                        <th>Demandante</th>
-                        <th>Demandado</th>
-                        <th>Departamento</th>
-                        <th>Ciudad</th>
-                        <th>Jurisdicción</th>
-                        <th>Competencia</th>
-                        <th>Tipo de proceso </th>
-                        <th>Etapa Procesal</th>
-                        <th>Contenido</th>
-                        <th>Historial de radicados</th>
-                        <th>Estado</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
+              <div class="table-responsive">
+                <table id="dataTableApp" class="table table-striped table-bordered w-100">
+                  <thead class="table-dark">
+                    <tr></tr>
+                  </thead>
+                  <tfoot>
+                    <tr></tr>
+                  </tfoot>
+                  <tbody id="table_body"></tbody>
+                </table>
               </div>
+            </div>
             </div>
           </div>
           <!--End Table-->
