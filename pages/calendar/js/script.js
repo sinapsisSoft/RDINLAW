@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     keyboard: false
   });
 
+  let globalDataSet = [];
   const calendarModal = new bootstrap.Modal(document.getElementById('calendarModal'));
   const eventForm = document.getElementById('eventForm');
   const saveBtn = document.getElementById('saveBtn');
@@ -142,30 +143,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Función para eliminar evento
   function deleteEvent(eventId) {
-    // fetch('eventos.php?action=delete', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ id: eventId })
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.status === 'success') {
-    //       calendar.refetchEvents();
-    //       eventModal.hide();
-    //     } else {
-    //       alert('Error al eliminar el evento: ' + data.message);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error:', error);
-    //     alert('Error al eliminar el evento');
-    //   });
-    //console.log('Delete evento...', eventId);
+     fetch('eventos.php?action=delete', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       body: JSON.stringify({ id: eventId })
+     })
+       .then(response => response.json())
+       .then(data => {
+         if (data.status === 'success') {
+           calendar.refetchEvents();
+           eventModal.hide();
+         } else {
+           alert('Error al eliminar el evento: ' + data.message);
+         }
+       })
+       .catch(error => {
+         console.error('Error:', error);
+         alert('Error al eliminar el evento');
+       });
+    console.log('Delete evento...', eventId);
   }
 
-  // Asegúrate de que el modal no sea muy alto en móviles
+  
   document.getElementById('eventModal').addEventListener('shown.bs.modal', function () {
     if (window.innerWidth < 768) {
       this.querySelector('.modal-dialog').classList.add('modal-fullscreen-sm-down');
@@ -394,8 +395,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
   }
-
+  
   function createTable(dataSet) {
+     globalDataSet = dataSet;
     const table = $('#dataTableApp').DataTable({
       data: dataSet,
       columns: [
@@ -523,39 +525,31 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   // Funciones que reciben el ID
   function showDetail(id) {
+  // Buscar el evento en los datos ya cargados
+  const event = globalDataSet.find(e => String(e.id) === String(id));
 
-    const eventData = {
-      GET: 'GET_EVENT_ID',
-      Event_id: id,
-    };
-    return fetch(ajaxCalendar, {
-      method: 'POST',
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(eventData)
-    }).then(response => response.json())
-      .then(data => {
-        if (data[0]) {
-
-        }
-        //console.log(data);
-        // Mostrar el modal con los datos del evento
-        eventForm.reset();
-        document.getElementById('eventId').value = data[0].id;
-        document.getElementById('title').value = data[0].title;
-        document.getElementById('start').value = data[0].start ? formatDateTimeInput(data[0].start) : '';
-        document.getElementById('end').value = data[0].end ? formatDateTimeInput(data[0].end) : '';
-        document.getElementById('color').value = data[0].color || '#bd3d3d';
-        fadeIn("eventModal", 500, () => {
-          eventModal.show();
-        });
-      })
-      .catch(error => {
-        console.error('Error al obtener los datos:', error);
-      });
+  if (!event) {
+    console.error('No se encontró el evento con id:', id);
+    alert('No se encontró el evento');
+    return;
   }
+
+  //console.log('Evento:', event);
+  eventForm.reset();
+  document.getElementById('eventId').value = event.id || '';
+  document.getElementById('title').value = event.title || '';
+  document.getElementById('start').value = event.start ? formatDateTimeInput(event.start) : '';
+  document.getElementById('end').value = event.end ? formatDateTimeInput(event.end) : '';
+  document.getElementById('color').value = event.color || '#bd3d3d';
+
+  deleteBtn.style.display = 'inline-block';
+  exportSection.style.display = 'inline-block';
+  document.getElementById('eventModalLabel').textContent = 'Editar Evento';
+
+  fadeIn("eventModal", 500, () => {
+    eventModal.show();
+  });
+}
 
   // Event listeners para exportación
   document.getElementById('exportGoogle').addEventListener('click', function () {

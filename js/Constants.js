@@ -7,5 +7,5 @@ const ajaxUserUpdateById = DNS + "php/bo/bo_user.php";
 const ajaxProcess = DNS + "php/bo/bo_process.php";
 const ajaxRequest = DNS + "php/bo/bo_request.php";
 //const ajaxRequest = DNS + "php/bo/bo_request.php";
-const ajaxCalendar = "http://localhost/projects/Dendrite_Processes/App/php/bo/bo_event.php";
+const ajaxCalendar = DNS + "php/bo/bo_event.php";
 const company = 1;

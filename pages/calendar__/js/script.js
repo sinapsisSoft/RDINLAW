@@ -49,7 +49,7 @@ function getDataEventTable() {
     body: JSON.stringify(dataSetUser)
   }).then(response => response.json())
     .then(data => {
-      //console.log('Success:', data);
+      console.log('Success:', data);
       createTable(data);
       fadeIn("table-container", 500, () => {
         LoadingScreen.hide();
