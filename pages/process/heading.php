@@ -1,6 +1,6 @@
 <div class="d-flex ">
   <a class="nav-link" style="display:contents" href="#">
-    <h1 class="mt-4">Procesos</h1>
+    <h1 class="mt-4">Informes</h1>
     <lord-icon class="lord-icon mt-4"
       style="width: 48px; height: 48px;"
       src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-18-autorenew-hover-autorenew.json"
@@ -13,5 +13,5 @@
   </a>
 </div>
 <ol class="breadcrumb mb-4">
-  <li class="breadcrumb-item active"><a href="../dashboard" title="Panel de Control">Panel de Control</a>/Procesos</li>
+  <li class="breadcrumb-item active"><a href="../dashboard" title="Panel de Control">Panel de Control</a>/Informes</li>
 </ol>

@@ -9,6 +9,7 @@ if ($var_session === null) {
   header("Location: ../auth");
   exit;
 }
+//var_dump($var_session);
 
 ?>
 <!DOCTYPE html>
@@ -42,6 +43,7 @@ if ($var_session === null) {
       <!--End slide bar-->
       <div id="layoutSidenav_content">
         <main>
+           <input type="hidden" id="User_id" value="<?php echo $var_session['User_id']; ?>">
           <div class="container-fluid px-4">
             <div class="d-flex ">
               <a class="nav-link" style="display:contents" href="#">
@@ -65,7 +67,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Expedientes</p>
-                    <h5 class="card-title">TOTAL 239 </h5>
+                    <h5 class="card-title">TOTAL <strong id="total_proceedings"></strong></h5>
 
                   </div>
                   <div class="card-footer  d-flex align-items-center justify-content-between header-app">
@@ -90,7 +92,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Solicitudes</p>
-                    <h5 class="card-title">TOTAL 16</h5>
+                    <h5 class="card-title">TOTAL <strong id="total_requests"></strong></h5>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between header-app">
                     <a class="nav-link" style="display:contents" href="../requests">
@@ -113,8 +115,8 @@ if ($var_session === null) {
               <div class="col-xl-3 col-md-6">
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
-                    <p class="card-text">Procesos</p>
-                    <h5 class="card-title">TOTAL PROCESOS</h5>
+                    <p class="card-text">Informes</p>
+                    <h5 class="card-title">VER INFORMES</h5>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between header-app">
                     <a class="nav-link" style="display:contents" href="../process">
@@ -138,7 +140,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Calendario</p>
-                    <h5 class="card-title">TOTAL 23</h5>
+                    <h5 class="card-title">TOTAL <strong id="total_calendar"></strong></h5>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between header-app">
                     <a class="nav-link" style="display:contents" href="../calendar/">

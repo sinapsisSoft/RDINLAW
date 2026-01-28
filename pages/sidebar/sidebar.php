@@ -86,7 +86,7 @@
               colors="primary:#ffffff,secondary:#b4b4b4">
             </lord-icon>
           </div>
-          Procesos
+          Informes
         </a>
         <a class="nav-link" href="../calendar">
           <div class="sb-nav-link-icon">

@@ -4,7 +4,7 @@ require_once '../../config/config.php';
 // Iniciar sesión
 SessionManager::start();
 $var_session = SessionManager::get(SESSION_KEY);
-var_dump($var_session);
+//var_dump($var_session);
 if ($var_session === null) {
   // Si no hay sesión, redirigir a login
   header("Location: ../auth");
