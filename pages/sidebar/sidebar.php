@@ -103,7 +103,7 @@
         </a>
 
 
-        <div class="sb-sidenav-menu-heading">Ajustes</div>
+        <!-- <div class="sb-sidenav-menu-heading">Ajustes</div>
         <a class="nav-link" href="#">
           <div class="sb-nav-link-icon">
             <lord-icon class="lord-icon"
@@ -116,7 +116,7 @@
             </lord-icon>
           </div>
           Configuración
-        </a>
+        </a> -->
 
       </div>
     </div>

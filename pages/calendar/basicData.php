@@ -8,7 +8,7 @@
                       <div class="row g-4">
                         <div class="col-12 col-md-6">
                           <span id="Comp_id" class="d-none"></span>
-                          <input type="hidden" id="User_id" value="8">
+                          <input type="hidden" id="User_id" value="<?php echo $var_session['User_id']; ?>">
                           <input type="hidden" id="Client_id">
                           <h5 id="labelName" class="card-title mb-3"></h5>
                           <div class="card-text">
