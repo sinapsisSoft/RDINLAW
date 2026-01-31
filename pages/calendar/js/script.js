@@ -68,14 +68,16 @@ document.addEventListener('DOMContentLoaded', function () {
   // Guardar evento
   saveBtn.addEventListener('click', function () {
     const eventId = document.getElementById('eventId').value;
+    const isEdit = eventId != 0 && eventId !== '';
+
     const eventData = {
-      POST: 'POST',
-      Event_id: eventId,
+      Event_id: isEdit ? eventId : 0,
       Event_title: document.getElementById('title').value,
       Event_start: document.getElementById('start').value,
       Event_end: document.getElementById('end').value,
       Event_color: document.getElementById('color').value,
       User_id: document.getElementById('User_id').value,
+      POST: isEdit ? 'UPDATE_EVENT' : 'ADD_EVENT',
     };
 
     if (!eventData.Event_title || !eventData.Event_start) {
@@ -83,88 +85,129 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    if (eventId != 0) {
+    if (isEdit) {
       // Actualizar evento existente
-      eventData.id = eventId;
-      // updateEvent(eventData);
-      console.log('Editar evento...', eventData);
+      console.log('Actualizando evento...', eventData);
+      updateEvent(eventData);
     } else {
       // Crear nuevo evento
       console.log('Creando evento...', eventData);
-      //createEvent(eventData);
+      createEvent(eventData);
     }
   });
 
   // Función para crear evento
   function createEvent(eventData) {
-    fetch('eventos.php?action=create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(eventData)
+  fetch(ajaxCalendar, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(eventData)
+  })
+    .then(async response => {
+      const text = await response.text();
+      let data = {};
+
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.error('JSON inválido en createEvent:', text);
+      }
+
+      if (!response.ok) {
+        const msg = data.message || `HTTP ${response.status}`;
+        throw new Error(msg);
+      }
+
+      return data;
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success') {
-          eventModal.hide();
-        } else {
-          alert('Error al crear el evento: ' + data.message);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Error al crear el evento');
-      });
-  }
+    .then(data => {
+      alert('Evento creado correctamente');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error en createEvent:', error);
+      alert('Error al crear el evento: ' + error.message);
+      calendar.refetchEvents();
+    });
+}
 
   // Función para actualizar evento
   function updateEvent(eventData) {
-    fetch('eventos.php?action=update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(eventData)
+  fetch(ajaxCalendar, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(eventData)
+  })
+    .then(async response => {
+      const text = await response.text();
+      let data = {};
+
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.error('JSON inválido en updateEvent:', text);
+      }
+
+      if (!response.ok) {
+        const msg = data.message || `HTTP ${response.status}`;
+        throw new Error(msg);
+      }
+
+      return data;
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status !== 'success') {
-          alert('Error al actualizar el evento: ' + data.message);
-          calendar.refetchEvents(); // Recargar eventos para revertir cambios
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Error al actualizar el evento');
-        calendar.refetchEvents(); // Recargar eventos para revertir cambios
-      });
-  }
+    .then(data => {
+      alert('Evento actualizado correctamente');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error en updateEvent:', error);
+      alert('Error al actualizar el evento: ' + error.message);
+      calendar.refetchEvents();
+    });
+}
+
+
 
   // Función para eliminar evento
   function deleteEvent(eventId) {
-     fetch('eventos.php?action=delete', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       body: JSON.stringify({ id: eventId })
-     })
-       .then(response => response.json())
-       .then(data => {
-         if (data.status === 'success') {
-           calendar.refetchEvents();
-           eventModal.hide();
-         } else {
-           alert('Error al eliminar el evento: ' + data.message);
-         }
-       })
-       .catch(error => {
-         console.error('Error:', error);
-         alert('Error al eliminar el evento');
-       });
-    console.log('Delete evento...', eventId);
-  }
+  fetch(ajaxCalendar, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ Event_id: eventId })
+  })
+    .then(async response => {
+      const text = await response.text();
+      let data = {};
+
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.error('JSON inválido en deleteEvent:', text);
+      }
+
+      if (!response.ok) {
+        const msg = data.message || `HTTP ${response.status}`;
+        throw new Error(msg);
+      }
+
+      return data;
+    })
+    .then(data => {
+      alert('Evento eliminado correctamente');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error en deleteEvent:', error);
+      alert('Error al eliminar el evento: ' + error.message);
+      calendar.refetchEvents();
+    });
+}
 
   
   document.getElementById('eventModal').addEventListener('shown.bs.modal', function () {
@@ -176,8 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('btn-calendar').addEventListener('click', () => {
 
     getDataEvents().then(response => response.json()).then(data => {
-      if (data.length > 0) {
-        // Uso básico
         inicializarCalendario(
           calendarElement,
           data
@@ -186,11 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
           calendarModal.show();
 
         });
-
-      } else {
-        alert('No se tienen eventos: ');
-      }
-
     }).catch(error => {
       console.error('Error:', error);
       alert('Error al consultar los eventos');
@@ -201,200 +237,188 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
-  function inicializarCalendario(calendarEl, jsonData) {
+  document.getElementById('btn-calendar2').addEventListener('click', () => {
 
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-      locale: 'es',
-      initialView: getInitialViewBasedOnScreenSize(),
-      initialDate: today, // FORZAR que comience en la fecha actual
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    getDataEvents().then(response => response.json()).then(data => {
+        inicializarCalendario(
+          calendarElement,
+          data
+        );
+        fadeIn("calendarModal", 500, () => {
+          calendarModal.show();
+
+        });
+    }).catch(error => {
+      console.error('Error:', error);
+      alert('Error al consultar los eventos');
+    }).finally(() => {
+      LoadingScreen.hide();
+    });
+
+  });
+
+ 
+
+//Variable global
+let calendar = null;
+
+//Función para determinar vista inicial
+function getInitialViewBasedOnScreenSize() {
+  if (window.innerWidth < 576) {
+    return 'timeGridDay';
+  } else if (window.innerWidth < 992) {
+    return 'timeGridWeek';
+  } else {
+    return 'dayGridMonth';
+  }
+}
+
+function inicializarCalendario(calendarEl, jsonData) {
+  // Si existe, destruye antes de crear uno nuevo
+  if (calendar) {
+    calendar.destroy();
+    calendar = null;
+  }
+
+  calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: 'es',
+    initialView: getInitialViewBasedOnScreenSize(),
+    initialDate: today,
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: jsonData,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    height: 'auto',
+    contentHeight: 'auto',
+    aspectRatio: 1.8,
+    handleWindowResize: true,
+    windowResizeDelay: 100,
+    views: {
+      dayGridMonth: {
+        dayMaxEventRows: 3,
       },
-      events: jsonData,
-      editable: true,
-      selectable: true,
-      selectMirror: true,
-      dayMaxEvents: true,
-      height: 'auto',
-      contentHeight: 'auto',
-      aspectRatio: 1.8,
-      handleWindowResize: true,
-      windowResizeDelay: 100,
-      // Ajustes para vistas específicas
-      views: {
-        dayGridMonth: {
-          dayMaxEventRows: 3, // Límite de eventos por día en vista mes
-        },
-        timeGridWeek: {
-          allDaySlot: false
-        },
-        timeGridDay: {
-          allDaySlot: false
+      timeGridWeek: {
+        allDaySlot: false
+      },
+      timeGridDay: {
+        allDaySlot: false
+      }
+    },
+    eventClick: function (info) {
+      document.getElementById('eventId').value = info.event.id;
+      document.getElementById('title').value = info.event.title;
+      document.getElementById('start').value = formatDateTimeForInput(info.event.start);
+      document.getElementById('end').value = info.event.end ? formatDateTimeForInput(info.event.end) : '';
+      document.getElementById('color').value = info.event.backgroundColor || '#bd3d3d';
+
+      deleteBtn.style.display = 'inline-block';
+      exportSection.style.display = 'inline-block';
+      deleteBtn.onclick = function () {
+        if (confirm('¿Estás seguro de eliminar este evento?')) {
+          deleteEvent(info.event.id);
         }
-      },
-      eventClick: function (info) {
-        // Cargar datos del evento en el modal
-        document.getElementById('eventId').value = info.event.id;
-        document.getElementById('title').value = info.event.title;
-        document.getElementById('start').value = formatDateTimeForInput(info.event.start);
-        document.getElementById('end').value = info.event.end ? formatDateTimeForInput(info.event.end) : '';
-        document.getElementById('color').value = info.event.backgroundColor || '#bd3d3d';
+      };
 
-        // Mostrar botón de eliminar
-        deleteBtn.style.display = 'inline-block';
-        exportSection.style.display = 'inline-block';
-        deleteBtn.onclick = function () {
-          if (confirm('¿Estás seguro de eliminar este evento?')) {
-            deleteEvent(info.event.id);
-          }
-        };
+      document.getElementById('eventModalLabel').textContent = 'Editar Evento';
+      eventModal.show();
+    },
+  select: function (info) {
+  eventForm.reset();
+  document.getElementById('eventId').value = '';
 
-        document.getElementById('eventModalLabel').textContent = 'Editar Evento';
-        eventModal.show();
-      },
-      select: function (info) {
-        // Limpiar el formulario para nuevo evento
-        eventForm.reset();
-        document.getElementById('eventId').value = '';
-        document.getElementById('start').value = formatDateTimeForInput(info.start);
-        document.getElementById('end').value = formatDateTimeForInput(info.end);
-        document.getElementById('color').value = '#bd3d3d';
+  const start = info.start;
+  const endExclusive = info.end;
+  const endInclusive = new Date(endExclusive.getTime() - 24 * 60 * 60 * 1000);
 
-        // Ocultar botón de eliminar
-        deleteBtn.style.display = 'none';
-        exportSection.style.display = 'none';
-        document.getElementById('eventModalLabel').textContent = 'Agregar Evento';
-        eventModal.show();
-      },
-      eventDrop: function (info) {
-        updateEvent(info.event);
-      },
-      eventResize: function (info) {
-        updateEvent(info.event);
-      },
-      datesSet: function (info) {
-        // Forzar una actualización del tamaño después de un pequeño delay
-        setTimeout(() => {
-          calendar.updateSize();
-          forceCalendarRender();
-          console.log('Calendar rendered');
-        }, 150);
-      }
-    });
+  document.getElementById('start').value = formatDateTimeForInput(start);
+  document.getElementById('end').value   = formatDateTimeForInput(endInclusive);
+  document.getElementById('color').value = '#bd3d3d';
 
-    // Función para determinar la vista inicial según el tamaño de pantalla
-    function getInitialViewBasedOnScreenSize() {
-      if (window.innerWidth < 576) {
-        return 'timeGridDay';
-      } else if (window.innerWidth < 992) {
-        return 'timeGridWeek';
-      } else {
-        return 'dayGridMonth';
-      }
+  deleteBtn.style.display = 'none';
+  exportSection.style.display = 'none';
+  document.getElementById('eventModalLabel').textContent = 'Agregar Evento';
+  eventModal.show();
+  },
+    eventDrop: function (info) {
+      updateEvent(info.event);
+    },
+    eventResize: function (info) {
+      updateEvent(info.event);
+    },
+    datesSet: function () {
+      // Ajuste suave después de cambiar fechas/vista
+      setTimeout(forceCalendarRender, 150);
+      console.log('Calendar rendered');
     }
+  });
 
-    calendar.render();
-    // Redibujar el calendario cuando cambia el tamaño de la ventana
-    window.addEventListener('resize', function () {
-      const newView = getInitialViewBasedOnScreenSize();
-      if (calendar.view.type !== newView) {
-        calendar.changeView(newView);
-      }
-      console.log("Botón resize");
-      setTimeout(forceCalendarRender, 100);
-    });
-    // Agregar evento personalizado al botón "today" del calendario
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('fc-today-button')) {
-        goToToday();
-        //console.log("Botón 'today' pulsado");
-      }
-    });
-    // FORZAR que se muestre el día actual después de renderizar
-    function forceCalendarRender() {
-      calendar.updateSize();
-      calendar.render();
+  calendar.render();
 
-      // Múltiples actualizaciones para asegurar el renderizado completo
-      setTimeout(() => {
+  // Redibujar cuando cambia tamaño de la ventana 
+  window.addEventListener('resize', function () {
+    const newView = getInitialViewBasedOnScreenSize();
+    if (calendar.view.type !== newView) {
+      calendar.changeView(newView);
+    }
+    console.log('Botón resize');
+    setTimeout(forceCalendarRender, 100);
+  });
+
+  // Botón today
+  document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('fc-today-button')) {
+      goToToday();
+    }
+  });
+
+  // Forzar ir al día actual una vez
+  goToToday();
+}
+
+
+function forceCalendarRender() {
+  calendar.updateSize();
+  calendar.render();
+  // Múltiples actualizaciones para asegurar el renderizado completo
+  setTimeout(() => {
         calendar.updateSize();
         calendar.render();
-      }, 100);
-      setTimeout(() => calendar.updateSize(), 300);
-      setTimeout(() => calendar.updateSize(), 500);
-    }
+  }, 100);
+  setTimeout(() => calendar.updateSize(), 300);
+  setTimeout(() => calendar.updateSize(), 600);
+}
 
-    // Ejecutar después de que todo esté cargado
-    //setTimeout(forceCalendarRender, 100);
-    // Función para ir al día actual
-    function goToToday() {
-      calendar.today();
-      highlightToday();
-      setTimeout(forceCalendarRender, 50);
-    }
+function goToToday() {
+  if (!calendar) return;
+  calendar.today();
+  highlightToday();
+  setTimeout(forceCalendarRender, 50);
+}
 
-    // Función para resaltar el día actual
-    function highlightToday() {
-      // Remover resaltado anterior
-      document.querySelectorAll('.fc-day-today').forEach(day => {
-        day.style.backgroundColor = '';
-      });
+function highlightToday() {
+  document.querySelectorAll('.fc-day-today').forEach(day => {
+    day.style.backgroundColor = '';
+  });
 
-      // Resaltar el día actual
-      setTimeout(() => {
-        const todayCells = document.querySelectorAll('.fc-day-today');
-        todayCells.forEach(cell => {
-          cell.style.backgroundColor = '#e6f7ff';
-        });
-      }, 50);
-    }
-    // Observar cambios en el DOM del calendario
-    const observer = new MutationObserver(function (mutations) {
-      calendar.updateSize();
+  setTimeout(() => {
+    const todayCells = document.querySelectorAll('.fc-day-today');
+    todayCells.forEach(cell => {
+      cell.style.backgroundColor = '#e6f7ff';
     });
+  }, 50);
+}
 
-    // Comenzar a observar
-    observer.observe(calendarEl, {
-      childList: true,
-      subtree: true,
-      attributes: true
-    });
+// Formatear para datetime-local
+function formatDateTimeForInput(date) {
+  return date.toISOString().slice(0, 16);
+}
 
-    // Detener después de 3 segundos (suficiente tiem
-    // Solución agresiva para el problema de renderizado inicial
-    function forceCalendarUpdate() {
-      calendar.updateSize();
-      calendar.render();
-      // Múltiples actualizaciones para asegurar
-      setTimeout(() => calendar.updateSize(), 100);
-      setTimeout(() => calendar.updateSize(), 300);
-      setTimeout(() => calendar.updateSize(), 500);
-    }
-    // Ejecutar cuando el DOM esté completamente cargado
-    if (document.readyState === 'complete') {
-      forceCalendarUpdate();
-    } else {
-      window.addEventListener('load', forceCalendarUpdate);
-    }
-    // También forzar actualización cuando las imágenes se carguen
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('load', () => calendar.updateSize());
-    });
-    setTimeout(function () {
-      calendar.updateSize();
-      // También forzar un redibujado
-      window.dispatchEvent(new Event('resize'));
-      observer.disconnect();
-    }, 300);
-
-    // Función para formatear fecha para input datetime-local
-    function formatDateTimeForInput(date) {
-      return date.toISOString().slice(0, 16);
-    }
-
-  }
   
   function createTable(dataSet) {
      globalDataSet = dataSet;
@@ -544,6 +568,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   deleteBtn.style.display = 'inline-block';
   exportSection.style.display = 'inline-block';
+  deleteBtn.onclick = function () {
+    if (confirm('¿Estás seguro de eliminar este evento?')) {
+    deleteEvent(id);
+    }
+    };
   document.getElementById('eventModalLabel').textContent = 'Editar Evento';
 
   fadeIn("eventModal", 500, () => {

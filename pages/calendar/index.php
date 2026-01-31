@@ -74,9 +74,10 @@ if ($var_session === null) {
                     href="index.html"
                     colors="primary:#000000,secondary:#b4b4b4">
                   </lord-icon>
+                  <strong style="line-height: 2;position: absolute;">Tabla de Eventos</strong>
                 </a>
 
-                <strong style="line-height: 2;position: absolute;">Tabla de Eventos</strong>
+                
               </div>
               <div class="card-body">
                 <div class="table-responsive">

@@ -1,5 +1,5 @@
 <div class="d-flex ">
-  <a class="nav-link" style="display:contents" href="#">
+  <a class="nav-link" title="Ver Calendario" id="btn-calendar2" style="display:contents" href="#">
     <h1 class="mt-4">Eventos</h1>
     <lord-icon class="lord-icon mt-4"
       style="width: 48px; height: 48px;"
@@ -15,3 +15,4 @@
 <ol class="breadcrumb mb-4">
   <li class="breadcrumb-item active"><a href="../dashboard" title="Panel de Control">Panel de Control</a>/Eventos</li>
 </ol>
+
