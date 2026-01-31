@@ -28,7 +28,7 @@ const LoadingScreen = {
     },
     
     // Mostrar por un tiempo determinado (ms)
-    showTemporarily: function(duration = 2000, message) {
+    showTemporarily: function(duration = 2200, message) {
         this.show(message);
         setTimeout(() => this.hide(), duration);
     }

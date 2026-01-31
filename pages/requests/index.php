@@ -77,7 +77,7 @@ if ($var_session === null) {
 
                 <strong style="line-height: 2;position: absolute;">Tabla de Solicitudes </strong>
                 <div class="position-absolute top-0 end-0 m-1">
-                  <a href="#modal" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRequest"><lord-icon class="lord-icon"
+                  <a href="#modal" class="btn btn-success" title="Crear Solicitud" data-bs-toggle="modal" data-bs-target="#modalRequest"><lord-icon class="lord-icon"
                       style="width: 20px; height: 20px;"
                       src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-40-add-card-hover-add-card.json"
                       trigger="hover"

@@ -63,21 +63,28 @@ if ($var_session === null) {
           <div class="container-fluid px-4 pt-2" style="display: none;" id="table-container">
             <div class="card mb-4">
               <div class="card-header">
-                <a class="nav-link" title="Ver Calendario" id="btn-calendar" style="display:contents" href="#">
-
+                <a class="nav-link" style="display:contents" href="#">
                   <lord-icon class="lord-icon"
                     style="width: 30px; height: 30px;"
                     src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-23-calendar-hover-calendar.json"
                     trigger="hover"
                     stroke="light"
                     state="hover-pinch"
-                    href="index.html"
                     colors="primary:#000000,secondary:#b4b4b4">
                   </lord-icon>
-                  <strong style="line-height: 2;position: absolute;">Tabla de Eventos</strong>
                 </a>
 
-                
+                <strong style="line-height: 2;position: absolute;">Tabla de Eventos</strong>
+                <div class="position-absolute top-0 end-0 m-1">
+                  <a class="btn btn-success" title="Ver Calendario" id="btn-calendar"  href="#"><lord-icon class="lord-icon"
+                      style="width: 20px; height: 20px;"
+                      src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-40-add-card-hover-add-card.json"
+                      trigger="hover"
+                      stroke="light"
+                      state="hover-pinch"
+                      colors="primary:#ffffff,secondary:#b4b4b4">
+                    </lord-icon></a>
+                </div>
               </div>
               <div class="card-body">
                 <div class="table-responsive">

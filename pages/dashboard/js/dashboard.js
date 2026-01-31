@@ -1,3 +1,8 @@
+/*Author:DIEGO CASALLAS 
+  Date: June, 2025
+  Description: Dashboard JS functions
+*/
+
 (function () {
   'use strict';
   // Your code here
@@ -9,8 +14,10 @@
 })();
 
 
-
-
+/**
+ * The function `getDataConsolidated` sends a POST request to a server using fetch, retrieves data, and
+ * updates specific elements in the HTML with the received data.
+ */
 function getDataConsolidated() {
   let dataSetUser = { "GET": "GET_PROCESS_COUNT", "User_id": document.getElementById('User_id').value, "Name":""};
   //console.log(dataSetUser);
@@ -23,7 +30,7 @@ function getDataConsolidated() {
   }).then(response => response.json())
     .then(data => {
       //console.log('Success:', data[0].total_requests);
-      document.getElementById('total_proceedings').textContent = data[0].total_process;
+      document.getElementById('total_process').textContent = data[0].total_process;
       document.getElementById('total_requests').textContent = data[0].total_requests;
       document.getElementById('total_calendar').textContent = data[0].total_events;
     })

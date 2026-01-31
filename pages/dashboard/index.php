@@ -9,7 +9,6 @@ if ($var_session === null) {
   header("Location: ../auth");
   exit;
 }
-//var_dump($var_session);
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +42,7 @@ if ($var_session === null) {
       <!--End slide bar-->
       <div id="layoutSidenav_content">
         <main>
-           <input type="hidden" id="User_id" value="<?php echo $var_session['User_id']; ?>">
+          <input type="hidden" id="User_id" value="<?php echo $var_session['User_id']; ?>">
           <div class="container-fluid px-4">
             <div class="d-flex ">
               <a class="nav-link" style="display:contents" href="#">
@@ -67,7 +66,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Expedientes</p>
-                    <h5 class="card-title">TOTAL <strong id="total_proceedings"></strong></h5>
+                    <h5 class="card-title">TOTAL <strong id="total_process">0</strong></h5>
 
                   </div>
                   <div class="card-footer  d-flex align-items-center justify-content-between header-app">
@@ -92,7 +91,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Solicitudes</p>
-                    <h5 class="card-title">TOTAL <strong id="total_requests"></strong></h5>
+                    <h5 class="card-title">TOTAL <strong id="total_requests">0</strong></h5>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between header-app">
                     <a class="nav-link" style="display:contents" href="../requests">
@@ -140,7 +139,7 @@ if ($var_session === null) {
                 <div class="card bg-app-secondary text-white mb-4">
                   <div class="card-body">
                     <p class="card-text">Calendario</p>
-                    <h5 class="card-title">TOTAL <strong id="total_calendar"></strong></h5>
+                    <h5 class="card-title">TOTAL <strong id="total_calendar">0</strong></h5>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between header-app">
                     <a class="nav-link" style="display:contents" href="../calendar/">
