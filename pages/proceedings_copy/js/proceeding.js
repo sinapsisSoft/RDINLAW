@@ -29,11 +29,7 @@ function getDataClient() {
       document.getElementById("User_identification").innerHTML = data[0]["Client_identification"];
       document.getElementById("User_email").innerHTML = data[0]["User_email"];
       document.getElementById("Client_id").value = data[0]["Client_id"];
-      //getDataProceeding();
-      fadeIn("table-container-2", 500, () => {
-  
-        LoadingScreen.hide();
-      });
+      getDataProceeding();
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -57,7 +53,6 @@ function getDataProceeding() {
       //console.log('Success:', data);
       createTable(data);
       fadeIn("table-container", 500, () => {
-        fadeIn("table-container-2", 500);
         LoadingScreen.hide();
       });
 
@@ -194,7 +189,6 @@ function createTable(dataSet) {
   // Eventos para los botones (delegados porque se crean dinámicamente)
   $('#dataTableApp tbody').on('click', '.btn-detalle', function () {
     const id = $(this).data('id');
-    
     showDetail(id);
   });
   $('#dataTableApp tbody').on('click', '.btn-actuacion', function () {
@@ -384,7 +378,7 @@ function showPerformances(id) {
     body: JSON.stringify(dataSetUser)
   }).then(response => response.json())
     .then(data => {
-      //console.log('Success:', data[0]);
+      console.log('Success:', data[0]);
 
       createTablePerformance(data);
 

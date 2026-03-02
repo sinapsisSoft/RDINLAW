@@ -129,24 +129,9 @@ if ($var_session === null) {
             </div>
           </div>
           <!--End Table-->
-          <div class="container-fluid px-4 pt-2" style="display: none;" id="table-container-2">
+          <div class="container-fluid px-4 pt-2" style="display: none;" ">
             <div class="container-table">
-              <div class="card-header">
-                <a class="nav-link" style="display:contents" href="#">
-
-                  <lord-icon class="lord-icon"
-                    style="width: 30px; height: 30px;"
-                    src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-44-folder-hover-folder.json"
-                    trigger="hover"
-                    stroke="light"
-                    state="hover-pinch"
-                    href="index.html"
-                    colors="primary:#000000,secondary:#b4b4b4">
-                  </lord-icon>
-                </a>
-
-                <strong style="line-height: 2;position: absolute;">Tabla de Expedientes</strong>
-              </div>
+              <h1>Tabla de Expedientes</h1>
 
               <!-- Barra superior -->
               <div class="toolbar">
@@ -233,7 +218,6 @@ if ($var_session === null) {
   <?php require_once '../assets/js/script.php'; ?>
   <!--End Script App-->
   <!--Scripts page -->
-    <script src="js/table_filter.js"></script>
   <script src="js/proceeding.js"></script>
   <!--End Scripts-->
 </body>

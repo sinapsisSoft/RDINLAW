@@ -17,21 +17,34 @@ if (!isset($_SESSION['User'])) {
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Dendrite Process - RDL </title>
-  <!--Styles and Icons-->
-  <?php require_once '../assets/css/styles.php'; ?>
-  <!--End Styles and Icons-->
-  <link rel="stylesheet" href="css/process.css" />
+  <link rel="shortcut icon" href="../assets/startbootstrap-sb-admin/assets/img/icons/favicon.ico">
+  <link rel="icon" type="image/png" href="../assets/startbootstrap-sb-admin/assets/img/icons/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="../assets/startbootstrap-sb-admin/assets/img/icons/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="../assets/startbootstrap-sb-admin/assets/img/icons/favicon-96x96.png" sizes="96x96">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+  <link href="../assets/startbootstrap-sb-admin/css/styles.css" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  <style>
+    .lord-icon {
+      width: 20px;
+      height: 20px;
+      padding-top: 3px;
+      cursor: pointer;
+
+    }
+  </style>
 </head>
 
 <body class="sb-nav-fixed">
 
   <!--navbar-->
-  <?php require_once '../navbar/navbar.php'; ?>
+  <?php include '../navbar/navbar.php'; ?>
   <!--End navbar-->
 
   <div id="layoutSidenav">
     <!--Slide bar-->
-    <?php require_once '../sidebar/sidebar.php'; ?>
+    <?php include '../sidebar/sidebar.php'; ?>
     <!--End slide bar-->
     <div id="layoutSidenav_content">
       <main>
@@ -54,18 +67,21 @@ if (!isset($_SESSION['User'])) {
             <li class="breadcrumb-item active"><a href="../dashboard">Panel de Control</a>/Procesos</li>
           </ol>
           <div class="row">
-
-
+           
+         
+         
+         
           </div>
         </div>
       </main>
       <?php include '../footer/footer.php'; ?>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="../assets/startbootstrap-sb-admin/js/scripts.js"></script>
 
-  <!--Styles and Icons-->
-  <?php require_once '../assets/js/script.php'; ?>
-  <!--End Styles and Icons-->
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+  <script src="../assets/startbootstrap-sb-admin/js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

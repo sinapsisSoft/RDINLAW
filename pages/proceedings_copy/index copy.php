@@ -25,8 +25,6 @@ if ($var_session === null) {
   <?php require_once '../assets/css/styles.php'; ?>
   <!--End Styles and Icons-->
   <link rel="stylesheet" href="css/proceeding.css" />
-  <!-- Style table -->
-    <link rel="stylesheet" href="css/table.css">
 
 </head>
 
@@ -61,7 +59,7 @@ if ($var_session === null) {
             </div>
           </div>
 
-
+        
 
           <!--Table-->
           <div class="container-fluid px-4 pt-2" style="display: none;" id="table-container">
@@ -123,99 +121,11 @@ if ($var_session === null) {
                     </tfoot>
                   </table>
                 </div>
-
-
               </div>
             </div>
           </div>
           <!--End Table-->
-          <div class="container-fluid px-4 pt-2" style="display: none;" id="table-container-2">
-            <div class="container-table">
-              <div class="card-header">
-                <a class="nav-link" style="display:contents" href="#">
 
-                  <lord-icon class="lord-icon"
-                    style="width: 30px; height: 30px;"
-                    src="../assets/startbootstrap-sb-admin/assets/img/icons/json/system-regular-44-folder-hover-folder.json"
-                    trigger="hover"
-                    stroke="light"
-                    state="hover-pinch"
-                    href="index.html"
-                    colors="primary:#000000,secondary:#b4b4b4">
-                  </lord-icon>
-                </a>
-
-                <strong style="line-height: 2;position: absolute;">Tabla de Expedientes</strong>
-              </div>
-
-              <!-- Barra superior -->
-              <div class="toolbar">
-                <div class="show-entries">
-                  <label>Mostrar</label>
-                  <select id="entriesPerPage">
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select>
-                  <label>registros</label>
-                </div>
-                <div class="global-search">
-                  <i class="fas fa-search"></i>
-                  <input type="text" id="globalSearch" placeholder="Buscar...">
-                </div>
-              </div>
-
-              <!-- Selector de columnas -->
-              <div class="column-selector">
-                <span>Columnas visibles:</span>
-                <div class="column-checkboxes">
-                  <label><input type="checkbox" value="#" checked disabled> #</label>
-                  <label><input type="checkbox" value="Interno" checked> Interno</label>
-                  <label><input type="checkbox" value="Consecutivo" checked> Consecutivo</label>
-                  <label><input type="checkbox" value="Demandante" checked> Demandante</label>
-                  <label><input type="checkbox" value="Demandado" checked> Demandado</label>
-                  <label><input type="checkbox" value="Estado" checked> Estado</label>
-                  <label><input type="checkbox" value="Origen" checked> Origen</label>
-                  <label><input type="checkbox" value="Edificio/Juzgado" checked> Edificio/Juzgado</label>
-                  <label><input type="checkbox" value="Ciudad"> Ciudad</label>
-                  <label><input type="checkbox" value="Despacho"> Despacho</label>
-                  <label><input type="checkbox" value="Radicado"> Radicado</label>
-                  <label><input type="checkbox" value="Apoderado"> Apoderado</label>
-                  <label><input type="checkbox" value="Acciones" checked disabled> Acciones</label>
-                </div>
-              </div>
-
-              <!-- Tabla -->
-              <div class="table-container">
-                <table id="processTable">
-                  <thead id="tableHeaders"></thead>
-                  <tbody id="tableBody"></tbody>
-                </table>
-              </div>
-
-              <!-- Barra inferior -->
-              <div class="bottom-bar">
-                <div class="export-section">
-                  <span>Columna:</span>
-                  <div class="export-dropdown">
-                    <button class="export-btn">
-                      Exportar <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="export-options">
-                      <a href="#" id="exportPdf"><i class="fas fa-file-pdf"></i> PDF</a>
-                      <a href="#" id="exportCsv"><i class="fas fa-file-csv"></i> CSV</a>
-                      <a href="#" id="exportExcel"><i class="fas fa-file-excel"></i> Excel</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pagination-info" id="paginationInfo"></div>
-                <div class="pagination" id="pagination"></div>
-              </div>
-            </div>
-          </div>
         </main>
         <!--End Main Content-->
         <?php require_once '../footer/footer.php'; ?>
@@ -233,7 +143,6 @@ if ($var_session === null) {
   <?php require_once '../assets/js/script.php'; ?>
   <!--End Script App-->
   <!--Scripts page -->
-    <script src="js/table_filter.js"></script>
   <script src="js/proceeding.js"></script>
   <!--End Scripts-->
 </body>
