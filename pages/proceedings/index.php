@@ -10,6 +10,7 @@ if ($var_session === null) {
   exit;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

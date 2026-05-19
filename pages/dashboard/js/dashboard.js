@@ -20,7 +20,8 @@
  */
 function getDataConsolidated() {
   let dataSetUser = { "GET": "GET_PROCESS_COUNT", "User_id": document.getElementById('User_id').value, "Name":""};
-  //console.log(dataSetUser);
+  console.log(dataSetUser);
+  // debugger;
   fetch(ajaxProcess, {
     method: 'POST',
     headers: {
