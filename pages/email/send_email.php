@@ -58,7 +58,8 @@ $token = JWT::encode($payload, JWT_SECRET, 'HS256');
 $fechaExpiracion = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token válido por 1 hora
 
 // URL de recuperación (debes cambiar esto por tu URL real)
-$resetUrl = "https://rdl.dendrite-web.app/user/pages/auth/reset-password.php?token=$token";
+//$resetUrl = "https://localhost/projects/Dendrite_Processes/App/pages/auth/reset-password-customer.php?token=$token";
+$resetUrl = "https://rdl.dendrite.com.co/pages/auth/reset-password-customer.php?token=$token";
 
 // echo json_encode([
 //   'success' => true,

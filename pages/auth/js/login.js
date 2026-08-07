@@ -122,7 +122,7 @@ function checkLogin(dataSetUser) {
     body: JSON.stringify(dataSetUser)
   }).then(response => response.json())
     .then(data => {
-      //console.log('Success:', data);
+      console.log('Success:', data);
       if (data[0]["User_id"] != undefined) {
         fetch('../../config/auth.php', {
           method: 'POST',

@@ -1,5 +1,6 @@
 const KEY_STORAGE = 'dendrite_app';
-const DNS="https://rdl.dendrite.com.co/"
+const DNS="https://rdl.dendrite.com.co/";
+//const DNS="https://localhost/projects/Dendrite_Processes/App/";
 // Description : Global constiables to configure the ajax conection
 const ajaxUserLogin = DNS + "php/bo/bo_user.php";
 const ajaxUserByEmail = DNS + "php/bo/bo_user.php";
